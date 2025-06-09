@@ -20,23 +20,27 @@ $icon-color: #666
 .profile-container
   max-width: 1200px
   margin: 0 auto
-  padding: 6rem 1rem 2rem // Increased top padding to account for fixed header
+  padding: 6rem 1rem 2rem
   min-height: 100vh
   background-color: #f8f9fa
-  position: relative // Add position relative
+  position: relative
 
   .profile-header
     display: flex
     justify-content: space-between
     align-items: center
     margin-bottom: 2rem
+    margin-top: 3rem
     padding: 0 1rem
-    position: sticky // Make header sticky
-    top: 64px // Position below the main header
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
     background-color: #f8f9fa
-    z-index: 10 // Ensure it's above other content
-    padding: 1rem
+    z-index: 10
+    padding: 1.5rem
     border-bottom: 1px solid #e9ecef
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05)
 
     h1
       font-size: 2rem
@@ -60,6 +64,7 @@ $icon-color: #666
         background-color: #45a049
 
   .resumes-grid
+    margin-top: 5rem
     display: grid
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
     gap: 1.5rem
@@ -97,10 +102,12 @@ $icon-color: #666
           &.draft
             background-color: #fff3cd
             color: #856404
+            border: 1px solid #ffeeba
 
           &.completed
             background-color: #d4edda
             color: #155724
+            border: 1px solid #c3e6cb
 
       .resume-info
         padding: 1.25rem
@@ -117,6 +124,7 @@ $icon-color: #666
           i
             margin-left: 0.75rem
             font-size: 1rem
+            color: #2c3e50
 
       .resume-actions
         display: flex
@@ -127,6 +135,34 @@ $icon-color: #666
 
         button
           min-width: 100px
+          padding: 0.5rem 1rem
+          border-radius: 6px
+          background: white
+          transition: all 0.2s ease
+          
+          &.p-button-info
+            border: 1px solid #2196F3
+            color: #2196F3
+            
+            &:hover
+              background: #2196F3
+              color: white
+          
+          &.p-button-warning
+            border: 1px solid #FF9800
+            color: #FF9800
+            
+            &:hover
+              background: #FF9800
+              color: white
+          
+          &.p-button-danger
+            border: 1px solid #F44336
+            color: #F44336
+            
+            &:hover
+              background: #F44336
+              color: white
 
   .empty-state
     grid-column: 1 / -1
@@ -243,6 +279,116 @@ $icon-color: #666
       &:hover
         background-color: $accent-color-dark
         border-color: $accent-color-dark
+
+  .p-dialog
+    .p-dialog-header
+      background: #f8f9fa
+      border-bottom: 1px solid #e9ecef
+      padding: 1.5rem
+      border-radius: 8px 8px 0 0
+
+      .p-dialog-title
+        font-size: 1.25rem
+        font-weight: 600
+        color: #2c3e50
+
+    .p-dialog-content
+      padding: 2rem
+      background: white
+      border-radius: 0 0 8px 8px
+
+      .p-confirm-dialog-message
+        font-size: 1.1rem
+        color: #495057
+        margin: 0
+        line-height: 1.6
+
+    .p-dialog-footer
+      padding: 1.5rem
+      background: #f8f9fa
+      border-top: 1px solid #e9ecef
+      border-radius: 0 0 8px 8px
+
+      .p-button
+        min-width: 100px
+        padding: 0.75rem 1.5rem
+        font-size: 1rem
+        font-weight: 500
+        border-radius: 6px
+        transition: all 0.2s ease
+
+        &.p-button-danger
+          background: #dc3545
+          border-color: #dc3545
+          color: white
+
+          &:hover
+            background: #c82333
+            border-color: #bd2130
+
+        &.p-button-text
+          color: #6c757d
+          background: transparent
+          border: 1px solid #dee2e6
+
+          &:hover
+            background: #f8f9fa
+            color: #495057
+
+  .p-confirm-dialog
+    background: #fff !important
+    color: #111 !important
+    border-radius: 18px !important
+    box-shadow: 0 6px 24px rgba(0,0,0,0.16) !important
+    padding: 0 !important
+    min-width: 420px !important
+    max-width: 95vw !important
+
+    .p-dialog-header
+      background: #fff !important
+      border-bottom: none !important
+      padding: 2.5rem 2.5rem 1rem 2.5rem !important
+      .p-dialog-title
+        font-size: 2rem
+        font-weight: bold
+        color: #111
+
+    .p-dialog-content
+      background: #fff !important
+      padding: 2rem 2.5rem 1.5rem 2.5rem !important
+      font-size: 1.35rem
+      color: #111
+      text-align: center
+      .p-confirm-dialog-message
+        margin: 0
+        font-size: 1.35rem
+        color: #111
+
+    .p-dialog-footer
+      background: #fff !important
+      border-top: none !important
+      padding: 2rem 2.5rem 2.5rem 2.5rem !important
+      display: flex
+      justify-content: center
+      gap: 1.5rem
+      .p-button
+        min-width: 110px
+        font-size: 1.1rem
+        font-weight: 600
+        border-radius: 8px
+        box-shadow: none
+        border: none
+        transition: background 0.2s
+        &.p-button-text
+          background: #e0e0e0
+          color: #222
+          &:hover
+            background: #d5d5d5
+        &.p-button-danger
+          background: #e53935 !important
+          color: #fff !important
+          &:hover
+            background: #b71c1c !important
 
 // Responsive
 @media (max-width: 768px)

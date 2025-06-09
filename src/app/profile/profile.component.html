@@ -6,21 +6,29 @@
 
   <div class="profile-header">
     <h1>رزومه‌های من</h1>
-    <button pButton label="ساخت رزومه جدید" icon="pi pi-plus" routerLink="/resume-builder"></button>
+    <button pButton label="ساخت رزومه جدید" icon="pi pi-plus" (click)="createNewResume()"></button>
   </div>
 
   <div class="resumes-grid" *ngIf="!loading; else loadingTemplate">
     <p-card *ngFor="let resume of resumes" class="resume-card">
       <ng-template pTemplate="header">
         <div class="resume-header">
-          <h2>{{ resume.title }}</h2>
-          <span class="status-badge" [ngClass]="resume.status">
-            {{ resume.status === 'draft' ? 'پیش‌نویس' : 'تکمیل شده' }}
+          <h2>{{ resume.title || 'رزومه بدون عنوان' }}</h2>
+          <span class="status-badge" [ngClass]="resume.isComplete ? 'completed' : 'draft'">
+            {{ resume.isComplete ? 'تکمیل شده' : 'پیش‌نویس' }}
           </span>
         </div>
       </ng-template>
 
       <div class="resume-info">
+        <div class="info-item" *ngIf="resume.personalInfo?.name">
+          <i class="pi pi-user"></i>
+          <span>{{ resume.personalInfo.name }}</span>
+        </div>
+        <div class="info-item" *ngIf="resume.personalInfo?.jobTitle">
+          <i class="pi pi-briefcase"></i>
+          <span>{{ resume.personalInfo.jobTitle }}</span>
+        </div>
         <div class="info-item">
           <i class="pi pi-calendar"></i>
           <span>تاریخ ایجاد: {{ formatDate(resume.createdAt) }}</span>
@@ -33,8 +41,8 @@
 
       <ng-template pTemplate="footer">
         <div class="resume-actions">
-          <button pButton icon="pi pi-eye" label="مشاهده" class="p-button-info"></button>
-          <button pButton icon="pi pi-pencil" label="ویرایش" class="p-button-warning"></button>
+          <button pButton icon="pi pi-eye" label="مشاهده" class="p-button-info" [routerLink]="['/resume-show', resume.id]"></button>
+          <button pButton icon="pi pi-pencil" label="ویرایش" class="p-button-warning" [routerLink]="['/resume-builder', resume.id]"></button>
           <button pButton icon="pi pi-trash" label="حذف" class="p-button-danger" (click)="confirmDelete(resume)"></button>
         </div>
       </ng-template>

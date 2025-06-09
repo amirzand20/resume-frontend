@@ -2,44 +2,76 @@
 
 <div class="resume-builder-container">
   <p-toast position="bottom-left" styleClass="custom-toast"></p-toast>
+  
+  <!-- Stepper Section -->
+  <div class="stepper-section">
+    <div class="custom-stepper-container">
+      <div class="stepper-header">
+        <h1>ساخت رزومه</h1>
+        <p>لطفاً اطلاعات خود را وارد کنید و مراحل را تکمیل نمایید.</p>
+      </div>
+      <div class="custom-stepper">
+        <div class="step" [ngClass]="{'completed': currentStep > 0, 'current': currentStep === 0, 'pending': currentStep < 0}">
+          <div class="circle"></div>
+          <div class="step-label">اطلاعات شخصی</div>
+          <div class="step-badge" *ngIf="currentStep > 0">تکمیل شد</div>
+          <div class="step-badge" *ngIf="currentStep === 0">در حال انجام</div>
+          <div class="step-badge" *ngIf="currentStep < 0">در انتظار</div>
+        </div>
+        <div class="step" [ngClass]="{'completed': currentStep > 1, 'current': currentStep === 1, 'pending': currentStep < 1}">
+          <div class="circle"></div>
+          <div class="step-label">تحصیلات</div>
+          <div class="step-badge" *ngIf="currentStep > 1">تکمیل شد</div>
+          <div class="step-badge" *ngIf="currentStep === 1">در حال انجام</div>
+          <div class="step-badge" *ngIf="currentStep < 1">در انتظار</div>
+        </div>
+        <div class="step" [ngClass]="{'completed': currentStep > 2, 'current': currentStep === 2, 'pending': currentStep < 2}">
+          <div class="circle"></div>
+          <div class="step-label">سوابق کاری</div>
+          <div class="step-badge" *ngIf="currentStep > 2">تکمیل شد</div>
+          <div class="step-badge" *ngIf="currentStep === 2">در حال انجام</div>
+          <div class="step-badge" *ngIf="currentStep < 2">در انتظار</div>
+        </div>
+        <div class="step" [ngClass]="{'completed': currentStep > 3, 'current': currentStep === 3, 'pending': currentStep < 3}">
+          <div class="circle"></div>
+          <div class="step-label">مهارت‌ها</div>
+          <div class="step-badge" *ngIf="currentStep > 3">تکمیل شد</div>
+          <div class="step-badge" *ngIf="currentStep === 3">در حال انجام</div>
+          <div class="step-badge" *ngIf="currentStep < 3">در انتظار</div>
+        </div>
+        <div class="step" [ngClass]="{'completed': currentStep > 4, 'current': currentStep === 4, 'pending': currentStep < 4}">
+          <div class="circle"></div>
+          <div class="step-label">زبان‌ها</div>
+          <div class="step-badge" *ngIf="currentStep > 4">تکمیل شد</div>
+          <div class="step-badge" *ngIf="currentStep === 4">در حال انجام</div>
+          <div class="step-badge" *ngIf="currentStep < 4">در انتظار</div>
+        </div>
+        <div class="step" [ngClass]="{'completed': currentStep > 5, 'current': currentStep === 5, 'pending': currentStep < 5}">
+          <div class="circle"></div>
+          <div class="step-label">دوره‌های آموزشی</div>
+          <div class="step-badge" *ngIf="currentStep > 5">تکمیل شد</div>
+          <div class="step-badge" *ngIf="currentStep === 5">در حال انجام</div>
+          <div class="step-badge" *ngIf="currentStep < 5">در انتظار</div>
+        </div>
+        <div class="step" [ngClass]="{'completed': currentStep > 6, 'current': currentStep === 6, 'pending': currentStep < 6}">
+          <div class="circle"></div>
+          <div class="step-label">افتخارات</div>
+          <div class="step-badge" *ngIf="currentStep > 6">تکمیل شد</div>
+          <div class="step-badge" *ngIf="currentStep === 6">در حال انجام</div>
+          <div class="step-badge" *ngIf="currentStep < 6">در انتظار</div>
+        </div>
+        <div class="step" [ngClass]="{'completed': currentStep > 7, 'current': currentStep === 7, 'pending': currentStep < 7}">
+          <div class="circle"></div>
+          <div class="step-label">تکمیل</div>
+          <div class="step-badge" *ngIf="currentStep > 7">تکمیل شد</div>
+          <div class="step-badge" *ngIf="currentStep === 7">در حال انجام</div>
+          <div class="step-badge" *ngIf="currentStep < 7">در انتظار</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="resume-builder-card">
-    <div class="resume-builder-header">
-      <h1>ساخت رزومه</h1>
-      <p>لطفاً اطلاعات خود را وارد کنید و مراحل را تکمیل نمایید.</p>
-    </div>
-
-    <!-- Custom Stepper -->
-    <div class="custom-stepper">
-      <div class="step" [ngClass]="{'completed': currentStep > 0, 'current': currentStep === 0, 'pending': currentStep < 0}">
-        <div class="circle"></div>
-        <div class="step-label">اطلاعات شخصی</div>
-        <div class="step-badge" *ngIf="currentStep > 0">تکمیل شد</div>
-        <div class="step-badge" *ngIf="currentStep === 0">در حال انجام</div>
-        <div class="step-badge" *ngIf="currentStep < 0">در انتظار</div>
-      </div>
-      <div class="step" [ngClass]="{'completed': currentStep > 1, 'current': currentStep === 1, 'pending': currentStep < 1}">
-        <div class="circle"></div>
-        <div class="step-label">تحصیلات</div>
-        <div class="step-badge" *ngIf="currentStep > 1">تکمیل شد</div>
-        <div class="step-badge" *ngIf="currentStep === 1">در حال انجام</div>
-        <div class="step-badge" *ngIf="currentStep < 1">در انتظار</div>
-      </div>
-      <div class="step" [ngClass]="{'completed': currentStep > 2, 'current': currentStep === 2, 'pending': currentStep < 2}">
-        <div class="circle"></div>
-        <div class="step-label">مهارت‌ها</div>
-        <div class="step-badge" *ngIf="currentStep > 2">تکمیل شد</div>
-        <div class="step-badge" *ngIf="currentStep === 2">در حال انجام</div>
-        <div class="step-badge" *ngIf="currentStep < 2">در انتظار</div>
-      </div>
-      <div class="step" [ngClass]="{'completed': currentStep > 3, 'current': currentStep === 3, 'pending': currentStep < 3}">
-        <div class="circle"></div>
-        <div class="step-label">تکمیل</div>
-        <div class="step-badge" *ngIf="currentStep > 3">تکمیل شد</div>
-        <div class="step-badge" *ngIf="currentStep === 3">در حال انجام</div>
-        <div class="step-badge" *ngIf="currentStep < 3">در انتظار</div>
-      </div>
-    </div>
-
     <form [formGroup]="resumeForm" (ngSubmit)="onSubmit()" class="resume-form">
       <!-- Step 1: اطلاعات شخصی -->
       <div *ngIf="currentStep === 0" class="form-section">
@@ -201,8 +233,8 @@
       <!-- Navigation Buttons -->
       <div class="action-buttons">
         <button *ngIf="currentStep > 0" type="button" pButton label="قبلی" icon="pi pi-arrow-right" (click)="prevStep()" class="p-button-secondary"></button>
-        <button *ngIf="currentStep < 3" type="button" pButton label="بعدی" icon="pi pi-arrow-left" (click)="nextStep()" class="p-button-primary"></button>
-        <button *ngIf="currentStep === 3" type="submit" pButton label="ثبت رزومه" icon="pi pi-save" class="p-button-success"></button>
+        <button *ngIf="currentStep < 7" type="button" pButton label="بعدی" icon="pi pi-arrow-left" (click)="nextStep()" class="p-button-primary"></button>
+        <button *ngIf="currentStep === 7" type="submit" pButton label="ثبت رزومه" icon="pi pi-save" class="p-button-success"></button>
       </div>
     </form>
   </div>

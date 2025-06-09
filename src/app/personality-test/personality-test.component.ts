@@ -48,22 +48,21 @@ import { RouterModule } from '@angular/router';
     </div>
   `,
   styles: [`
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .options {
-      margin: 20px 0;
-    }
-    .personality-type {
-      font-size: 24px;
-      font-weight: bold;
-      margin: 20px 0;
-    }
-    .description {
-      font-size: 18px;
-      line-height: 1.6;
-    }
+    .container
+      max-width: 800px
+      margin: 0 auto
+
+    .options
+      margin: 20px 0
+
+    .personality-type
+      font-size: 24px
+      font-weight: bold
+      margin: 20px 0
+
+    .description
+      font-size: 18px
+      line-height: 1.6
   `]
 })
 export class PersonalityTestComponent implements OnInit {

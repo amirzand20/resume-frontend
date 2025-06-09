@@ -6,7 +6,8 @@ import { catchError } from 'rxjs/operators';
 export interface Resume {
   id: number;
   title: string;
-  status: 'draft' | 'completed';
+  status: string;
+  isComplete: boolean;
   createdAt: string;
   updatedAt: string;
   personalInfo: {
@@ -81,6 +82,7 @@ export class ResumeService {
       id: 1,
       title: 'رزومه نمونه ۱',
       status: 'completed',
+      isComplete: true,
       createdAt: '2024-03-20T10:00:00Z',
       updatedAt: '2024-03-20T10:00:00Z',
       personalInfo: {
@@ -143,6 +145,7 @@ export class ResumeService {
       id: 2,
       title: 'رزومه نمونه ۲',
       status: 'draft',
+      isComplete: false,
       createdAt: '2024-03-19T15:30:00Z',
       updatedAt: '2024-03-19T15:30:00Z',
       personalInfo: {
@@ -200,9 +203,8 @@ export class ResumeService {
   constructor(private http: HttpClient) {}
 
   getUserResumes(): Observable<Resume[]> {
-    // For testing, return mock data instead of making HTTP request
-    return of(this.mockResumes);
-    // return this.http.get<Resume[]>(`${this.apiUrl}/user/resumes`);
+    return this.http.get<Resume[]>(`${this.apiUrl}/step1/user-resumes`);
+    // return of(this.mockResumes); // Commenting out mock data
   }
 
   getResumeById(id: number): Observable<Resume> {
@@ -216,9 +218,14 @@ export class ResumeService {
   }
 
   deleteResume(id: number): Observable<void> {
-    // For testing, simulate successful deletion
-    this.mockResumes = this.mockResumes.filter(r => r.id !== id);
-    return of(void 0);
-    // return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/step1/${id}`);
+  }
+
+  submitStep1(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/step1`, data);
+  }
+
+  createNewResume(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/step1/create`, {});
   }
 } 

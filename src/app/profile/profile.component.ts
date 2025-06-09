@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -32,7 +32,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private resumeService: ResumeService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -59,7 +60,13 @@ export class ProfileComponent implements OnInit {
 
   confirmDelete(resume: Resume) {
     this.confirmationService.confirm({
-      message: 'آیا از حذف این رزومه اطمینان دارید؟',
+      message: 'آیا از حذف این رزومه مطمئن هستید؟',
+      header: 'تایید حذف',
+      acceptLabel: 'بله',
+      rejectLabel: 'خیر',
+      acceptButtonStyleClass: 'p-button-primary',
+      rejectButtonStyleClass: 'p-button-text',
+      icon: '',
       accept: () => {
         this.deleteResume(resume.id);
       }
@@ -88,5 +95,25 @@ export class ProfileComponent implements OnInit {
 
   formatDate(date: string): string {
     return new Date(date).toLocaleDateString('fa-IR');
+  }
+
+  createNewResume() {
+    this.resumeService.createNewResume().subscribe({
+      next: (response) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'موفق',
+          detail: 'رزومه جدید با موفقیت ایجاد شد'
+        });
+        this.router.navigate(['/resume-builder']);
+      },
+      error: (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'خطا',
+          detail: 'خطا در ایجاد رزومه جدید'
+        });
+      }
+    });
   }
 } 

@@ -15,6 +15,7 @@ import { HeaderComponent } from '../shared/header/header.component'
 import { registerLocaleData } from '@angular/common'
 import localeFa from '@angular/common/locales/fa'
 import { Calendar } from 'primeng/calendar'
+import { ResumeService } from '../services/resume.service'
 
 registerLocaleData(localeFa, 'fa')
 
@@ -80,8 +81,12 @@ export class ResumeBuilderComponent implements OnInit {
   steps: StepItem[] = [
     { label: 'اطلاعات شخصی', command: () => this.currentStep = 0 },
     { label: 'اطلاعات تحصیلی', command: () => this.currentStep = 1 },
-    { label: 'مهارت‌ها', command: () => this.currentStep = 2 },
-    { label: 'تکمیل', command: () => this.currentStep = 3 }
+    { label: 'سوابق کاری', command: () => this.currentStep = 2 },
+    { label: 'مهارت‌ها', command: () => this.currentStep = 3 },
+    { label: 'زبان‌ها', command: () => this.currentStep = 4 },
+    { label: 'دوره‌های آموزشی', command: () => this.currentStep = 5 },
+    { label: 'افتخارات', command: () => this.currentStep = 6 },
+    { label: 'تکمیل', command: () => this.currentStep = 7 }
   ]
 
   educationLevels = [
@@ -101,7 +106,8 @@ export class ResumeBuilderComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private resumeService: ResumeService
   ) {
     this.resumeForm = this.fb.group({
       // اطلاعات شخصی
@@ -199,14 +205,42 @@ export class ResumeBuilderComponent implements OnInit {
 
   nextStep() {
     if (this.validateCurrentStep()) {
-      this.currentStep++
-      this.showToast('info', 'مرحله بعدی', `شما در حال حاضر در مرحله ${this.currentStep + 1} از 4 هستید`)
+      if (this.currentStep === 0) {
+        // Get the personal information data
+        const personalInfo = {
+          nationalId: this.resumeForm.get('nationalId')?.value,
+          firstName: this.resumeForm.get('firstName')?.value,
+          lastName: this.resumeForm.get('lastName')?.value,
+          fatherName: this.resumeForm.get('fatherName')?.value,
+          birthDate: this.resumeForm.get('birthDate')?.value,
+          birthCity: this.resumeForm.get('birthCity')?.value,
+          currentCity: this.resumeForm.get('currentCity')?.value,
+          phone: this.resumeForm.get('phone')?.value,
+          email: this.resumeForm.get('email')?.value,
+          address: this.resumeForm.get('address')?.value
+        };
+
+        // Call the API
+        this.resumeService.submitStep1(personalInfo).subscribe({
+          next: () => {
+            this.currentStep++;
+            this.showToast('success', 'موفق', 'اطلاعات با موفقیت ذخیره شد');
+          },
+          error: (error) => {
+            this.showToast('error', 'خطا', 'خطا در ذخیره اطلاعات');
+            console.error('Error submitting step 1:', error);
+          }
+        });
+      } else {
+        this.currentStep++;
+        this.showToast('info', 'مرحله بعدی', `شما در حال حاضر در مرحله ${this.currentStep + 1} از 8 هستید`);
+      }
     }
   }
 
   prevStep() {
     this.currentStep--
-    this.showToast('info', 'مرحله قبلی', `شما در حال حاضر در مرحله ${this.currentStep + 1} از 4 هستید`)
+    this.showToast('info', 'مرحله قبلی', `شما در حال حاضر در مرحله ${this.currentStep + 1} از 8 هستید`)
   }
 
   getCurrentStepControls() {
