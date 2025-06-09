@@ -1,0 +1,368 @@
+<p-toast position="bottom-left" styleClass="custom-toast"></p-toast>
+
+<div class="resume-header-bar">
+  <div class="theme-selector">
+    <label for="theme">قالب رزومه:</label>
+    <p-dropdown [options]="themes" [(ngModel)]="selectedTheme" optionLabel="name" optionValue="value" [style]="{'width':'200px'}"></p-dropdown>
+  </div>
+  <p-button label="چاپ رزومه" icon="pi pi-print" (click)="printResume()"></p-button>
+</div>
+
+<div class="resume-content">
+  <ng-container *ngIf="loading">
+    <div class="loading-container">
+      <p-progressSpinner></p-progressSpinner>
+      <p>در حال بارگذاری رزومه...</p>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="error">
+    <div class="error-container">
+      <i class="pi pi-exclamation-triangle" style="font-size: 3rem; color: #f44336"></i>
+      <p>{{ error }}</p>
+      <p-button label="بازگشت به پروفایل" icon="pi pi-arrow-right" (click)="navigateToProfile()"></p-button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!loading && !error && resume">
+    <!-- Template 1 -->
+    <div class="template1" *ngIf="selectedTheme === 'template1'">
+      <div class="resume-header">
+        <h1>{{ resume.personalInfo.name }}</h1>
+        <h2>{{ resume.personalInfo.jobTitle }}</h2>
+      </div>
+
+      <div class="contact-info">
+        <div class="info-item" *ngIf="resume.contact.email">
+          <i class="pi pi-envelope"></i>
+          <span>{{ resume.contact.email }}</span>
+        </div>
+        <div class="info-item" *ngIf="resume.contact.mobile">
+          <i class="pi pi-phone"></i>
+          <span>{{ resume.contact.mobile }}</span>
+        </div>
+        <div class="info-item" *ngIf="resume.contact.address">
+          <i class="pi pi-map-marker"></i>
+          <span>{{ resume.contact.address }}</span>
+        </div>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.personalInfo.summary">
+        <h3>خلاصه</h3>
+        <p>{{ resume.personalInfo.summary }}</p>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.skills && resume.skills.length > 0">
+        <h3>مهارت‌ها</h3>
+        <div class="skills-grid">
+          <div class="skill-item" *ngFor="let skill of resume.skills">
+            <span>{{ skill.name }}</span>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="skill.percentage"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.education && resume.education.length > 0">
+        <h3>تحصیلات</h3>
+        <div class="education-item" *ngFor="let edu of resume.education">
+          <h4>{{ edu.degree }}</h4>
+          <p class="field">{{ edu.field }}</p>
+          <p class="university">{{ edu.university }}</p>
+          <p class="period">{{ edu.startYear }} - {{ edu.endYear }}</p>
+        </div>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.workExperience && resume.workExperience.length > 0">
+        <h3>سوابق کاری</h3>
+        <div class="work-item" *ngFor="let work of resume.workExperience">
+          <h4>{{ work.title }}</h4>
+          <p class="company">{{ work.company }}</p>
+          <p class="period">{{ work.startDate }} - {{ work.endDate }}</p>
+          <ul class="responsibilities" *ngIf="work.responsibilities && work.responsibilities.length > 0">
+            <li *ngFor="let resp of work.responsibilities">{{ resp }}</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.languages && resume.languages.length > 0">
+        <h3>زبان‌ها</h3>
+        <div class="language-skills">
+          <div class="skill-item" *ngFor="let lang of resume.languages">
+            <span>{{ lang.name }}</span>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="lang.reading"></div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="lang.writing"></div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="lang.speaking"></div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="lang.listening"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Template 2 -->
+    <div class="template2" *ngIf="selectedTheme === 'template2'">
+      <!-- Similar structure as template1 but with different styling -->
+      <div class="resume-header">
+        <h1>{{ resume.personalInfo.name }}</h1>
+        <h2>{{ resume.personalInfo.jobTitle }}</h2>
+      </div>
+
+      <div class="contact-info">
+        <div class="info-item" *ngIf="resume.contact.email">
+          <i class="pi pi-envelope"></i>
+          <span>{{ resume.contact.email }}</span>
+        </div>
+        <div class="info-item" *ngIf="resume.contact.mobile">
+          <i class="pi pi-phone"></i>
+          <span>{{ resume.contact.mobile }}</span>
+        </div>
+        <div class="info-item" *ngIf="resume.contact.address">
+          <i class="pi pi-map-marker"></i>
+          <span>{{ resume.contact.address }}</span>
+        </div>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.personalInfo.summary">
+        <h3>خلاصه</h3>
+        <p>{{ resume.personalInfo.summary }}</p>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.skills && resume.skills.length > 0">
+        <h3>مهارت‌ها</h3>
+        <div class="skills-grid">
+          <div class="skill-item" *ngFor="let skill of resume.skills">
+            <span>{{ skill.name }}</span>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="skill.percentage"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.education && resume.education.length > 0">
+        <h3>تحصیلات</h3>
+        <div class="education-item" *ngFor="let edu of resume.education">
+          <h4>{{ edu.degree }}</h4>
+          <p class="field">{{ edu.field }}</p>
+          <p class="university">{{ edu.university }}</p>
+          <p class="period">{{ edu.startYear }} - {{ edu.endYear }}</p>
+        </div>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.workExperience && resume.workExperience.length > 0">
+        <h3>سوابق کاری</h3>
+        <div class="work-item" *ngFor="let work of resume.workExperience">
+          <h4>{{ work.title }}</h4>
+          <p class="company">{{ work.company }}</p>
+          <p class="period">{{ work.startDate }} - {{ work.endDate }}</p>
+          <ul class="responsibilities" *ngIf="work.responsibilities && work.responsibilities.length > 0">
+            <li *ngFor="let resp of work.responsibilities">{{ resp }}</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.languages && resume.languages.length > 0">
+        <h3>زبان‌ها</h3>
+        <div class="language-skills">
+          <div class="skill-item" *ngFor="let lang of resume.languages">
+            <span>{{ lang.name }}</span>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="lang.reading"></div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="lang.writing"></div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="lang.speaking"></div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="lang.listening"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Template 3 -->
+    <div class="template3" *ngIf="selectedTheme === 'template3'">
+      <!-- Similar structure as template1 but with different styling -->
+      <div class="resume-header">
+        <h1>{{ resume.personalInfo.name }}</h1>
+        <h2>{{ resume.personalInfo.jobTitle }}</h2>
+      </div>
+
+      <div class="contact-info">
+        <div class="info-item" *ngIf="resume.contact.email">
+          <i class="pi pi-envelope"></i>
+          <span>{{ resume.contact.email }}</span>
+        </div>
+        <div class="info-item" *ngIf="resume.contact.mobile">
+          <i class="pi pi-phone"></i>
+          <span>{{ resume.contact.mobile }}</span>
+        </div>
+        <div class="info-item" *ngIf="resume.contact.address">
+          <i class="pi pi-map-marker"></i>
+          <span>{{ resume.contact.address }}</span>
+        </div>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.personalInfo.summary">
+        <h3>خلاصه</h3>
+        <p>{{ resume.personalInfo.summary }}</p>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.skills && resume.skills.length > 0">
+        <h3>مهارت‌ها</h3>
+        <div class="skills-grid">
+          <div class="skill-item" *ngFor="let skill of resume.skills">
+            <span>{{ skill.name }}</span>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="skill.percentage"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.education && resume.education.length > 0">
+        <h3>تحصیلات</h3>
+        <div class="education-item" *ngFor="let edu of resume.education">
+          <h4>{{ edu.degree }}</h4>
+          <p class="field">{{ edu.field }}</p>
+          <p class="university">{{ edu.university }}</p>
+          <p class="period">{{ edu.startYear }} - {{ edu.endYear }}</p>
+        </div>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.workExperience && resume.workExperience.length > 0">
+        <h3>سوابق کاری</h3>
+        <div class="work-item" *ngFor="let work of resume.workExperience">
+          <h4>{{ work.title }}</h4>
+          <p class="company">{{ work.company }}</p>
+          <p class="period">{{ work.startDate }} - {{ work.endDate }}</p>
+          <ul class="responsibilities" *ngIf="work.responsibilities && work.responsibilities.length > 0">
+            <li *ngFor="let resp of work.responsibilities">{{ resp }}</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.languages && resume.languages.length > 0">
+        <h3>زبان‌ها</h3>
+        <div class="language-skills">
+          <div class="skill-item" *ngFor="let lang of resume.languages">
+            <span>{{ lang.name }}</span>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="lang.reading"></div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="lang.writing"></div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="lang.speaking"></div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="lang.listening"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Template 4 -->
+    <div class="template4" *ngIf="selectedTheme === 'template4'">
+      <!-- Similar structure as template1 but with different styling -->
+      <div class="resume-header">
+        <h1>{{ resume.personalInfo.name }}</h1>
+        <h2>{{ resume.personalInfo.jobTitle }}</h2>
+      </div>
+
+      <div class="contact-info">
+        <div class="info-item" *ngIf="resume.contact.email">
+          <i class="pi pi-envelope"></i>
+          <span>{{ resume.contact.email }}</span>
+        </div>
+        <div class="info-item" *ngIf="resume.contact.mobile">
+          <i class="pi pi-phone"></i>
+          <span>{{ resume.contact.mobile }}</span>
+        </div>
+        <div class="info-item" *ngIf="resume.contact.address">
+          <i class="pi pi-map-marker"></i>
+          <span>{{ resume.contact.address }}</span>
+        </div>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.personalInfo.summary">
+        <h3>خلاصه</h3>
+        <p>{{ resume.personalInfo.summary }}</p>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.skills && resume.skills.length > 0">
+        <h3>مهارت‌ها</h3>
+        <div class="skills-grid">
+          <div class="skill-item" *ngFor="let skill of resume.skills">
+            <span>{{ skill.name }}</span>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="skill.percentage"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.education && resume.education.length > 0">
+        <h3>تحصیلات</h3>
+        <div class="education-item" *ngFor="let edu of resume.education">
+          <h4>{{ edu.degree }}</h4>
+          <p class="field">{{ edu.field }}</p>
+          <p class="university">{{ edu.university }}</p>
+          <p class="period">{{ edu.startYear }} - {{ edu.endYear }}</p>
+        </div>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.workExperience && resume.workExperience.length > 0">
+        <h3>سوابق کاری</h3>
+        <div class="work-item" *ngFor="let work of resume.workExperience">
+          <h4>{{ work.title }}</h4>
+          <p class="company">{{ work.company }}</p>
+          <p class="period">{{ work.startDate }} - {{ work.endDate }}</p>
+          <ul class="responsibilities" *ngIf="work.responsibilities && work.responsibilities.length > 0">
+            <li *ngFor="let resp of work.responsibilities">{{ resp }}</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="resume-section" *ngIf="resume.languages && resume.languages.length > 0">
+        <h3>زبان‌ها</h3>
+        <div class="language-skills">
+          <div class="skill-item" *ngFor="let lang of resume.languages">
+            <span>{{ lang.name }}</span>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="lang.reading"></div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="lang.writing"></div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="lang.speaking"></div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-level" [style.width.%]="lang.listening"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<div *ngIf="!loading && !resume" class="error-container">
+  <i class="pi pi-exclamation-triangle" style="font-size: 2rem"></i>
+  <p>رزومه مورد نظر یافت نشد</p>
+</div> 

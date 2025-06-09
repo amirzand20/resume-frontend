@@ -1,89 +1,91 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterModule, Router } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { PasswordModule } from 'primeng/password';
-import { CheckboxModule } from 'primeng/checkbox';
-import { ToastModule } from 'primeng/toast';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { ToastService } from '../services/toast.service';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-auth',
+  templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.sass'],
   standalone: true,
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     FormsModule,
-    RouterModule,
-    HttpClientModule,
     InputTextModule,
     ButtonModule,
-    PasswordModule,
     CheckboxModule,
     ToastModule
-  ],
-  templateUrl: './auth.component.html',
-  styleUrl: './auth.component.sass'
+  ]
 })
-export class AuthComponent {
-  username: string = '';
-  password: string = '';
-  rememberMe: boolean = false;
+export class AuthComponent implements OnInit {
+  loginForm: FormGroup;
   isLoading: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private toastService: ToastService
-  ) {}
-
-  login() {
-    if (!this.username || !this.password) {
-      this.toastService.error('خطا', 'لطفا نام کاربری و رمز عبور را وارد کنید');
-      return;
-    }
-
-    this.isLoading = true;
-    
-    this.authService.login({
-      username: this.username,
-      password: this.password,
-      role:"user"
-    }).subscribe({
-      next: (response) => {
-        this.isLoading = false;
-        
-        // Save token using the service
-        this.authService.saveToken(response.token, this.rememberMe);
-        
-        this.toastService.success('موفق', 'ورود با موفقیت انجام شد');
-        
-        // Redirect to dashboard or home page after successful login
-        setTimeout(() => {
-          this.router.navigate(['/']);
-        }, 1500);
-      },
-      error: (error) => {
-        this.isLoading = false;
-        this.toastService.error('خطا', error.error?.message || 'خطا در ورود به سیستم');
-      }
+    private toastService: ToastService,
+    private fb: FormBuilder
+  ) {
+    this.loginForm = this.fb.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      rememberMe: [false]
     });
   }
 
-  forgotPassword() {
-    if (!this.username) {
+  ngOnInit(): void {
+    if (this.authService.isLoggedIn()) {
+      console.log('AuthComponent: User already logged in, redirecting to home');
+      this.router.navigate(['/']);
+    }
+  }
+
+  login(): void {
+    if (this.loginForm.valid) {
+      console.log('AuthComponent: Starting login process');
+      const { username, password, rememberMe } = this.loginForm.value;
+      this.isLoading = true;
+      
+      this.authService.login({ username, password }).subscribe({
+        next: (response) => {
+          console.log('AuthComponent: Login successful, response:', response);
+          this.authService.saveToken(response.access_token, rememberMe);
+          console.log('AuthComponent: Token saved, navigating to home');
+          this.isLoading = false;
+          this.toastService.success('موفق', 'ورود با موفقیت انجام شد');
+          this.router.navigateByUrl('/', { replaceUrl: true });
+        },
+        error: (error) => {
+          console.error('AuthComponent: Login error:', error);
+          this.isLoading = false;
+          this.errorMessage = error.error?.message || 'خطا در ورود به سیستم';
+          this.toastService.error('خطا', this.errorMessage);
+        }
+      });
+    } else {
+      this.toastService.error('خطا', 'لطفا تمام فیلدها را پر کنید');
+    }
+  }
+
+  forgotPassword(): void {
+    const username = this.loginForm.get('username')?.value;
+    if (!username) {
       this.toastService.error('خطا', 'لطفا نام کاربری خود را وارد کنید');
       return;
     }
 
     this.isLoading = true;
     
-    this.authService.forgotPassword({
-      username: this.username
-    }).subscribe({
+    this.authService.forgotPassword({ username }).subscribe({
       next: () => {
         this.isLoading = false;
         this.toastService.info('اطلاعات', 'لینک بازیابی رمز عبور به ایمیل شما ارسال شد');

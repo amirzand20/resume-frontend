@@ -1,0 +1,56 @@
+<app-header></app-header>
+
+<div class="profile-container">
+  <p-toast position="bottom-left" styleClass="custom-toast"></p-toast>
+  <p-confirmDialog></p-confirmDialog>
+
+  <div class="profile-header">
+    <h1>رزومه‌های من</h1>
+    <button pButton label="ساخت رزومه جدید" icon="pi pi-plus" routerLink="/resume-builder"></button>
+  </div>
+
+  <div class="resumes-grid" *ngIf="!loading; else loadingTemplate">
+    <p-card *ngFor="let resume of resumes" class="resume-card">
+      <ng-template pTemplate="header">
+        <div class="resume-header">
+          <h2>{{ resume.title }}</h2>
+          <span class="status-badge" [ngClass]="resume.status">
+            {{ resume.status === 'draft' ? 'پیش‌نویس' : 'تکمیل شده' }}
+          </span>
+        </div>
+      </ng-template>
+
+      <div class="resume-info">
+        <div class="info-item">
+          <i class="pi pi-calendar"></i>
+          <span>تاریخ ایجاد: {{ formatDate(resume.createdAt) }}</span>
+        </div>
+        <div class="info-item">
+          <i class="pi pi-clock"></i>
+          <span>آخرین ویرایش: {{ formatDate(resume.updatedAt) }}</span>
+        </div>
+      </div>
+
+      <ng-template pTemplate="footer">
+        <div class="resume-actions">
+          <button pButton icon="pi pi-eye" label="مشاهده" class="p-button-info"></button>
+          <button pButton icon="pi pi-pencil" label="ویرایش" class="p-button-warning"></button>
+          <button pButton icon="pi pi-trash" label="حذف" class="p-button-danger" (click)="confirmDelete(resume)"></button>
+        </div>
+      </ng-template>
+    </p-card>
+
+    <div class="empty-state" *ngIf="resumes.length === 0">
+      <i class="pi pi-file"></i>
+      <h3>هنوز رزومه‌ای ایجاد نکرده‌اید</h3>
+      <p>برای ایجاد رزومه جدید، روی دکمه "ساخت رزومه جدید" کلیک کنید.</p>
+    </div>
+  </div>
+
+  <ng-template #loadingTemplate>
+    <div class="loading-state">
+      <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+      <p>در حال بارگذاری...</p>
+    </div>
+  </ng-template>
+</div> 
