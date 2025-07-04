@@ -54,7 +54,7 @@ export class AuthComponent implements OnInit {
       console.log('AuthComponent: Starting login process');
       const { username, password, rememberMe } = this.loginForm.value;
       this.isLoading = true;
-      
+
       this.authService.login({ username, password }).subscribe({
         next: (response) => {
           console.log('AuthComponent: Login successful, response:', response);
@@ -76,7 +76,8 @@ export class AuthComponent implements OnInit {
     }
   }
 
-  forgotPassword(): void {
+  forgotPassword(e: Event): void {
+    e.preventDefault();
     const username = this.loginForm.get('username')?.value;
     if (!username) {
       this.toastService.error('خطا', 'لطفا نام کاربری خود را وارد کنید');
@@ -84,7 +85,7 @@ export class AuthComponent implements OnInit {
     }
 
     this.isLoading = true;
-    
+
     this.authService.forgotPassword({ username }).subscribe({
       next: () => {
         this.isLoading = false;
