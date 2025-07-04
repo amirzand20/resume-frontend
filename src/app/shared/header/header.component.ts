@@ -8,20 +8,7 @@ import { MenuModule } from 'primeng/menu'
   selector: 'app-header',
   standalone: true,
   imports: [CommonModule, RouterModule, ButtonModule, MenuModule],
-  template: `
-    <header class="header">
-      <div class="header-content">
-        <div class="logo">
-          <a routerLink="/">
-            <img src="assets/images/logo.png" alt="Logo" />
-          </a>
-        </div>
-        <div class="auth-buttons">
-          <button pButton label="ورود" icon="pi pi-sign-in" routerLink="/auth" class="p-button-outlined"></button>
-        </div>
-      </div>
-    </header>
-  `,
+  templateUrl: "./header.component.html",
   styles: [`
     .header
       background-color: #ffffff
@@ -49,7 +36,7 @@ import { MenuModule } from 'primeng/menu'
   `]
 })
 export class HeaderComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   logout() {
     // Add your logout logic here

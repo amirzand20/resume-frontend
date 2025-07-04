@@ -10,7 +10,7 @@ import { ToastComponent } from './shared/toast/toast.component';
     <router-outlet></router-outlet>
     <app-toast></app-toast>
   `,
-  styleUrl: './app.component.sass'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'resume';

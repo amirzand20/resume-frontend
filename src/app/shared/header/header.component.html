@@ -1,27 +1,12 @@
 <header class="header">
-  <div class="header-container">
+  <div class="header-content">
     <div class="logo">
-      <img src="assets/images/logo.png" alt="Logo" />
+      <a routerLink="/">
+        <img src="../../../assets/logo.svg" alt="Logo" />
+      </a>
     </div>
-    
-    <div class="user-menu" pMenu #menu="pMenu" [popup]="true">
-      <button pButton type="button" icon="pi pi-user" class="p-button-rounded p-button-text" (click)="menu.toggle($event)"></button>
-      <ng-template pTemplate="content">
-        <ul class="p-menu-list">
-          <li class="p-menu-item">
-            <a routerLink="/profile" class="p-menuitem-link">
-              <i class="pi pi-user p-menuitem-icon"></i>
-              <span class="p-menuitem-text">پروفایل</span>
-            </a>
-          </li>
-          <li class="p-menu-item">
-            <a (click)="logout()" class="p-menuitem-link">
-              <i class="pi pi-sign-out p-menuitem-icon"></i>
-              <span class="p-menuitem-text">خروج</span>
-            </a>
-          </li>
-        </ul>
-      </ng-template>
+    <div class="auth-buttons">
+      <button pButton label="ورود" icon="pi pi-sign-in" routerLink="/auth" class="p-button-outlined"></button>
     </div>
   </div>
-</header> 
+</header>

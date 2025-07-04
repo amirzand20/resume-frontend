@@ -23,7 +23,7 @@ import { HeaderComponent } from '../shared/header/header.component';
   ],
   providers: [ConfirmationService, MessageService],
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.sass']
+  styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
   resumes: Resume[] = [];

@@ -12,7 +12,7 @@ import { ToastModule } from 'primeng/toast';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.sass'],
+  styleUrls: ['./auth.component.scss'],
   standalone: true,
   imports: [
     CommonModule,

@@ -58,7 +58,7 @@ interface ToastMessage {
 @Component({
   selector: 'app-resume-builder',
   templateUrl: './resume-builder.component.html',
-  styleUrls: ['./resume-builder.component.sass'],
+  styleUrls: ['./resume-builder.component.scss'],
   standalone: true,
   imports: [
     CommonModule,

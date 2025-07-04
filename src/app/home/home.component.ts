@@ -13,7 +13,7 @@ import { AuthService } from '../services/auth.service';
     ButtonModule
   ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.sass'
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
   constructor(public authService: AuthService) {}

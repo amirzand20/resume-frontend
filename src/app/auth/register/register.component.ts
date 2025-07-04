@@ -26,7 +26,7 @@ import { ToastService } from '../../services/toast.service';
     ToastModule
   ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.sass'
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
   fullName: string = '';
