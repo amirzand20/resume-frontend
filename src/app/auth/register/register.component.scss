@@ -1,4 +1,4 @@
-@import '../../assets/variable.scss';
+@import '../../../assets/variable.scss';
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap');
 
 // Auth container
@@ -10,7 +10,6 @@
   background-color: $primary-color;
   direction: rtl;
   padding: 1rem;
-  font-family: 'Vazirmatn', sans-serif;
 }
 
 // Register form container
@@ -121,6 +120,7 @@
   font-weight: 600 !important;
   font-size: 1rem !important;
   transition: background-color 0.3s ease !important;
+  border-radius: 8px;
   
   &:hover:not(:disabled) {
     background-color: $accent-color-dark !important;

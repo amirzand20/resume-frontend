@@ -49,11 +49,12 @@ export class RegisterComponent {
       this.toastService.error('خطا', 'لطفا تمام فیلدها را پر کنید');
       return;
     }
-
+    
     if (this.password !== this.confirmPassword) {
       this.toastService.error('خطا', 'رمز عبور و تکرار آن مطابقت ندارند');
       return;
     }
+    console.log(123);
 
     if (!this.acceptTerms) {
       this.toastService.error('خطا', 'لطفا قوانین و مقررات را بپذیرید');

@@ -177,7 +177,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     .option-label
       margin-right: 0.5rem
       cursor: pointer
-      color: #ffffff
+      // color: #ffffff 
       font-size: 1.1rem
       font-weight: 500
       transition: color 0.3s ease

@@ -12,6 +12,7 @@ import { ToastModule } from 'primeng/toast'
 import { StepsModule } from 'primeng/steps'
 import { MessageService } from 'primeng/api'
 import { HeaderComponent } from '../shared/header/header.component'
+import { PersianDatePickerComponent } from '../shared/persian-date-picker/persian-date-picker.component'
 import { registerLocaleData } from '@angular/common'
 import localeFa from '@angular/common/locales/fa'
 import { Calendar } from 'primeng/calendar'
@@ -71,13 +72,14 @@ interface ToastMessage {
     InputNumberModule,
     ToastModule,
     StepsModule,
-    HeaderComponent
+    HeaderComponent,
+    PersianDatePickerComponent
   ],
   providers: [MessageService]
 })
 export class ResumeBuilderComponent implements OnInit {
   resumeForm: FormGroup
-  currentStep = 0
+  currentStep = 1
   steps: StepItem[] = [
     { label: 'اطلاعات شخصی', command: () => this.currentStep = 0 },
     { label: 'اطلاعات تحصیلی', command: () => this.currentStep = 1 },

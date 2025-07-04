@@ -2,7 +2,7 @@
 $primary-color: #1f2159;
 $accent-color: #f0a500;
 $accent-color-dark: #d89400;
-$text-color: #ffffff;
+$text-color: #000;
 $card-bg-color: #ffffff;
 $dark-blue: #1f2159;
 $form-bg-color: #ffffff;
@@ -19,7 +19,7 @@ $card-bg: #ffffff;
 $shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 // Stepper variables
 $step-pending: #e5e7eb;
-$step-current: $primary-color;
+$step-current: rgb(0, 136, 255);
 $step-completed: $success-color;
 $step-label-color: $text-color;
 $step-label-muted: $muted-color;

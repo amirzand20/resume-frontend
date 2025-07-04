@@ -2,10 +2,12 @@
 @import '../../assets/variable.scss';
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap');
 
-body, .resume-builder-container {
+body,
+.resume-builder-container {
   background: $background-color !important;
-  font-family: 'Vazirmatn', sans-serif;
-  min-height: 100vh;
+
+  min-height: 90vh;
+  margin-top: 10vh;
 }
 
 .resume-builder-container {
@@ -28,6 +30,7 @@ body, .resume-builder-container {
       font-weight: 700;
       margin-bottom: 0.5rem;
     }
+
     p {
       color: $muted-color;
       font-size: 1.1rem;
@@ -69,7 +72,6 @@ body, .resume-builder-container {
         }
 
         h1 {
-          color: $primary-color;
           font-size: 2.2rem;
           font-weight: 700;
           margin-bottom: 0.75rem;
@@ -132,6 +134,7 @@ body, .resume-builder-container {
           &.completed:not(:last-child)::after {
             background: $step-connector-completed;
           }
+
           &.current:not(:last-child)::after {
             background: $step-connector-current;
           }
@@ -152,36 +155,42 @@ body, .resume-builder-container {
             transition: all 0.3s;
           }
 
-          &.completed .circle {
-            background: $step-completed;
-            color: #fff;
-            border: 3px solid $step-completed;
-            &::before {
-              content: '\2713';
-              font-size: 1.4rem;
+          &.completed {
+
+            .step-label,
+            .step-badge {
+              color: $step-completed;
+            }
+
+            .circle {
+              background: $step-completed;
               color: #fff;
-              font-weight: 700;
-              display: block;
+              border: 3px solid $step-completed;
+
+              &::before {
+                content: '\2713';
+                font-size: 1.4rem;
+                color: #fff;
+                font-weight: 700;
+                display: block;
+              }
             }
           }
 
           &.current .circle {
             background: #fff;
-            color: $step-current;
             border: 3px solid $step-current;
             box-shadow: 0 0 0 3px #e3f0fd;
           }
 
           &.pending .circle {
             background: $step-pending;
-            color: $step-label-muted;
             border: 3px solid $step-pending;
           }
 
           .step-label {
             font-size: 1.1rem;
             font-weight: 600;
-            color: $step-label-color;
             margin-bottom: 0.5rem;
             text-align: center;
             line-height: 1.4;
@@ -191,6 +200,11 @@ body, .resume-builder-container {
           .step-badge {
             display: inline-block;
             margin-top: 0.35rem;
+          }
+
+
+          &.current {
+            color: $step-current;
           }
         }
       }
@@ -242,6 +256,7 @@ body, .resume-builder-container {
     background: $card-bg;
     border-radius: 1rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
     h2 {
       color: $primary-color;
       font-size: 1.5rem;
@@ -251,14 +266,17 @@ body, .resume-builder-container {
       border-bottom: 2px solid $primary-color;
     }
   }
+
   .form-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
     margin-bottom: 1.5rem;
   }
+
   .form-group {
     margin-bottom: 1.5rem;
+
     label {
       display: block;
       margin-bottom: 0.5rem;
@@ -266,29 +284,38 @@ body, .resume-builder-container {
       font-weight: 500;
       font-size: 0.95rem;
     }
-    input, textarea, p-calendar, p-dropdown, p-inputNumber {
+
+    input,
+    textarea,
+    p-calendar,
+    p-dropdown,
+    p-inputNumber {
       width: 100%;
       padding: 0.75rem;
       border: 1px solid $border-color;
       border-radius: 0.5rem;
-      font-family: 'Vazirmatn', sans-serif;
+
       font-size: 1rem;
       color: $text-color;
       background-color: #ffffff;
       transition: all 0.3s ease;
+
       &:focus {
         outline: none;
         border-color: $primary-color;
         box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
       }
+
       &.ng-invalid.ng-touched {
         border-color: $error-color;
         background-color: #fff5f5;
       }
+
       &::placeholder {
         color: $muted-color;
       }
     }
+
     .error-message {
       color: $error-color;
       font-size: 0.875rem;
@@ -303,37 +330,45 @@ body, .resume-builder-container {
   justify-content: space-between;
   margin-top: 2rem;
   gap: 1rem;
+
   button {
     padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 0.5rem;
-    font-family: 'Vazirmatn', sans-serif;
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
     min-width: 120px;
+
     &.p-button-primary {
-      background: $primary-color;
-      color: #ffffff;
+      background: white;
+
+      // color: #ffffff;
       &:hover {
+        color: white;
         background: color.adjust($primary-color, $lightness: -10%);
       }
     }
+
     &.p-button-secondary {
       background: $accent-color;
-      color: #ffffff;
+
+      // color: #ffffff;
       &:hover {
         background: color.adjust($accent-color, $lightness: -10%);
       }
     }
+
     &.p-button-danger {
       background: $error-color;
-      color: #ffffff;
+
+      // color: #ffffff;
       &:hover {
         background: color.adjust($error-color, $lightness: -10%);
       }
     }
+
     &:disabled {
       background: $disabled-color;
       cursor: not-allowed;
@@ -346,25 +381,33 @@ body, .resume-builder-container {
   .resume-builder-card {
     padding: 1.5rem;
     margin: 1rem;
+
     .custom-stepper-container {
       padding: 1rem;
+
       .custom-stepper {
         flex-direction: column;
         align-items: stretch;
         padding: 1rem 0.5rem;
+
         .step {
           flex-direction: row;
           align-items: center;
           margin-bottom: 1.5rem;
           min-width: auto;
+
           .circle {
             margin-bottom: 0;
             margin-left: 1rem;
           }
-          .step-label, .step-title, .step-badge {
+
+          .step-label,
+          .step-title,
+          .step-badge {
             text-align: right;
           }
         }
+
         .step:not(:last-child)::after {
           top: 50%;
           left: 2.5rem;
@@ -374,11 +417,14 @@ body, .resume-builder-container {
         }
       }
     }
+
     .resume-form .form-grid {
       grid-template-columns: 1fr;
     }
+
     .action-buttons {
       flex-direction: column;
+
       button {
         width: 100%;
         margin-bottom: 0.5rem;
@@ -402,6 +448,7 @@ body, .resume-builder-container {
     right: 20px;
 
     .p-toast-message {
+
       &.p-toast-message-success,
       &.p-toast-message-error {
         border-right: none;
@@ -447,19 +494,25 @@ body, .resume-builder-container {
         flex-direction: column;
         align-items: stretch;
         padding: 1rem 0.5rem;
+
         .step {
           flex-direction: row;
           align-items: center;
           margin-bottom: 1.5rem;
           min-width: auto;
+
           .circle {
             margin-bottom: 0;
             margin-left: 1rem;
           }
-          .step-label, .step-title, .step-badge {
+
+          .step-label,
+          .step-title,
+          .step-badge {
             text-align: right;
           }
         }
+
         .step:not(:last-child)::after {
           top: 50%;
           left: 2.5rem;
@@ -491,6 +544,7 @@ body, .resume-builder-container {
       }
 
       .p-datepicker-title {
+
         .p-datepicker-year,
         .p-datepicker-month {
           color: $text-color;
@@ -505,27 +559,45 @@ body, .resume-builder-container {
         }
 
         td {
-          > span {
+          >span {
             color: $text-color;
+
             &:hover {
               background: rgba($primary-color, 0.1);
             }
           }
 
           &.p-datepicker-today {
-            > span {
+            >span {
               background: rgba($primary-color, 0.2);
               color: $primary-color;
             }
           }
 
           &.p-datepicker-selected {
-            > span {
+            >span {
               background: $primary-color;
-              color: #ffffff;
+              // color: #ffffff;
             }
           }
         }
+      }
+    }
+  }
+}
+
+::ng-deep .p-select-list-container {
+  background-color: white;
+  padding: .5rem 1rem;
+  border: 1px solid $input-border-color;
+  border-radius: 8px;
+
+  ul {
+    p-dropdownitem {
+      padding: .5rem;
+      &:hover {
+        border-radius: 8px;
+        background-color: $input-border-color;
       }
     }
   }
@@ -549,6 +621,7 @@ body, .resume-builder-container {
     .p-calendar {
       .p-datepicker {
         .p-datepicker-header {
+
           .p-datepicker-prev,
           .p-datepicker-next {
             transform: scaleX(-1);
@@ -672,6 +745,7 @@ body, .resume-builder-container {
       .p-toast-icon-close {
         color: #6c757d;
         margin-right: 0.5rem;
+
         &:hover {
           color: #343a40;
         }
@@ -688,6 +762,7 @@ body, .resume-builder-container {
       right: auto !important;
 
       .p-toast-message {
+
         &.p-toast-message-success,
         &.p-toast-message-error,
         &.p-toast-message-info {
@@ -714,9 +789,11 @@ body, .resume-builder-container {
         .custom-stepper {
           flex-wrap: wrap;
           gap: 2rem;
+
           .step {
             flex: 1 1 calc(33.333% - 2rem);
             min-width: 180px;
+
             &:not(:last-child)::after {
               display: none;
             }
@@ -730,26 +807,34 @@ body, .resume-builder-container {
 @media (max-width: 768px) {
   .resume-builder-container {
     padding: 1rem;
+
     .stepper-section {
       .custom-stepper-container {
         padding: 1.25rem 1rem;
+
         .custom-stepper {
           flex-direction: column;
           align-items: stretch;
           padding: 0.5rem;
+
           .step {
             flex-direction: row;
             align-items: center;
             margin-bottom: 1.5rem;
             min-width: auto;
+
             .circle {
               margin-bottom: 0;
               margin-left: 1rem;
             }
-            .step-label, .step-title, .step-badge {
+
+            .step-label,
+            .step-title,
+            .step-badge {
               text-align: right;
             }
           }
+
           .step:not(:last-child)::after {
             top: 50%;
             left: 2.5rem;
@@ -761,4 +846,4 @@ body, .resume-builder-container {
       }
     }
   }
-} 
+}

@@ -8,15 +8,16 @@ import { ResumeBuilderComponent } from './resume-builder/resume-builder.componen
 import { ResumeShowComponent } from './resume-show/resume-show.component';
 import { PsychologicalTestComponent } from './psychological-test/psychological-test.component';
 import { PersonalityTestComponent } from './personality-test/personality-test.component';
+import { LoginComponent } from './auth/login/login.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { 
-    path: 'auth', 
+  {
+    path: '',
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
-      { path: 'login', component: AuthComponent },
-      { path: 'register', component: RegisterComponent }
+      { path: 'auth/login', component: LoginComponent },
+      { path: 'auth/register', component: RegisterComponent }
     ]
   },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },

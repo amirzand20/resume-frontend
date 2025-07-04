@@ -109,7 +109,8 @@
           </div>
           <div class="form-group">
             <label for="birthDate">تاریخ تولد</label>
-            <p-calendar id="birthDate" formControlName="birthDate" [locale]="calendarConfig.locale" [dateFormat]="calendarConfig.dateFormat" [showIcon]="calendarConfig.showIcon" [showButtonBar]="calendarConfig.showButtonBar" [firstDayOfWeek]="calendarConfig.firstDayOfWeek" [showWeek]="calendarConfig.showWeek" [showOtherMonths]="calendarConfig.showOtherMonths" [selectOtherMonths]="calendarConfig.selectOtherMonths" [yearRange]="calendarConfig.yearRange"></p-calendar>
+            <!-- <p-calendar id="birthDate" formControlName="birthDate" [locale]="calendarConfig.locale" [dateFormat]="calendarConfig.dateFormat" [showIcon]="calendarConfig.showIcon" [showButtonBar]="calendarConfig.showButtonBar" [firstDayOfWeek]="calendarConfig.firstDayOfWeek" [showWeek]="calendarConfig.showWeek" [showOtherMonths]="calendarConfig.showOtherMonths" [selectOtherMonths]="calendarConfig.selectOtherMonths" [yearRange]="calendarConfig.yearRange"></p-calendar> -->
+            <aja-persian-date-picker formControlName="birthDate"></aja-persian-date-picker>
             <div class="error-message" *ngIf="resumeForm.get('birthDate')?.errors?.['required'] && resumeForm.get('birthDate')?.touched">
               تاریخ تولد الزامی است
             </div>
@@ -188,11 +189,13 @@
             </div>
             <div class="form-group">
               <label>تاریخ شروع</label>
-              <p-calendar formControlName="startDate" [locale]="calendarConfig.locale" [dateFormat]="calendarConfig.dateFormat" [showIcon]="calendarConfig.showIcon" [showButtonBar]="calendarConfig.showButtonBar" [firstDayOfWeek]="calendarConfig.firstDayOfWeek" [showWeek]="calendarConfig.showWeek" [showOtherMonths]="calendarConfig.showOtherMonths" [selectOtherMonths]="calendarConfig.selectOtherMonths" [yearRange]="calendarConfig.yearRange"></p-calendar>
+              <!-- <p-calendar formControlName="startDate" [locale]="calendarConfig.locale" [dateFormat]="calendarConfig.dateFormat" [showIcon]="calendarConfig.showIcon" [showButtonBar]="calendarConfig.showButtonBar" [firstDayOfWeek]="calendarConfig.firstDayOfWeek" [showWeek]="calendarConfig.showWeek" [showOtherMonths]="calendarConfig.showOtherMonths" [selectOtherMonths]="calendarConfig.selectOtherMonths" [yearRange]="calendarConfig.yearRange"></p-calendar> -->
+              <aja-persian-date-picker formControlName="startDate"></aja-persian-date-picker>
             </div>
             <div class="form-group">
               <label>تاریخ پایان</label>
-              <p-calendar formControlName="endDate" [locale]="calendarConfig.locale" [dateFormat]="calendarConfig.dateFormat" [showIcon]="calendarConfig.showIcon" [showButtonBar]="calendarConfig.showButtonBar" [firstDayOfWeek]="calendarConfig.firstDayOfWeek" [showWeek]="calendarConfig.showWeek" [showOtherMonths]="calendarConfig.showOtherMonths" [selectOtherMonths]="calendarConfig.selectOtherMonths" [yearRange]="calendarConfig.yearRange"></p-calendar>
+              <aja-persian-date-picker formControlName="endDate"></aja-persian-date-picker>
+              <!-- <p-calendar formControlName="endDate" [locale]="calendarConfig.locale" [dateFormat]="calendarConfig.dateFormat" [showIcon]="calendarConfig.showIcon" [showButtonBar]="calendarConfig.showButtonBar" [firstDayOfWeek]="calendarConfig.firstDayOfWeek" [showWeek]="calendarConfig.showWeek" [showOtherMonths]="calendarConfig.showOtherMonths" [selectOtherMonths]="calendarConfig.selectOtherMonths" [yearRange]="calendarConfig.yearRange"></p-calendar> -->
             </div>
           </div>
           <div class="form-group">
@@ -232,8 +235,8 @@
 
       <!-- Navigation Buttons -->
       <div class="action-buttons">
-        <button *ngIf="currentStep > 0" type="button" pButton label="قبلی" icon="pi pi-arrow-right" (click)="prevStep()" class="p-button-secondary"></button>
         <button *ngIf="currentStep < 7" type="button" pButton label="بعدی" icon="pi pi-arrow-left" (click)="nextStep()" class="p-button-primary"></button>
+        <button *ngIf="currentStep > 0" type="button" pButton label="قبلی" icon="pi pi-arrow-right" (click)="prevStep()" class="p-button-primary"></button>
         <button *ngIf="currentStep === 7" type="submit" pButton label="ثبت رزومه" icon="pi pi-save" class="p-button-success"></button>
       </div>
     </form>
