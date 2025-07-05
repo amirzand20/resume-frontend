@@ -1,0 +1,219 @@
+@import '../../assets/variable.scss';
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap');
+
+// General styles
+.landing-page {
+  background-color: $primary-color;
+  color: white;
+  min-height: 100vh;
+  direction: rtl;
+  overflow-x: hidden;
+  position: relative;
+}
+
+// Main content
+.main-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 10rem;
+}
+
+.left-content {
+  flex: 1;
+  padding-right: 2rem;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.right-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.main-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: white;
+}
+
+.description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.submit-button {
+  background-color: $accent-color;
+  border: none;
+  color: $primary-color;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.8rem 2.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $accent-color-dark;
+  }
+}
+
+.jobs-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: white;
+}
+
+// Job cards
+.job-cards {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.actions{
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+
+  & > *{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    gap: .5rem;
+    
+    h3, button{
+      margin: 0 !important;
+    }
+  }
+}
+
+.job-card {
+  background-color: $card-bg-color;
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-width: 200px;
+  color: $primary-color;
+  width: fit-content;
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: $primary-color;
+    white-space: nowrap;
+  }
+
+  p {
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+
+  &.vertical{
+    display: flex;
+  }
+}
+
+// Soldier image
+.soldier-image-container {
+  position: relative;
+  width: 400px;
+  height: 500px;
+}
+
+.soldier-bg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  position: relative;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://via.placeholder.com/400x500/1f2159/ffffff?text=Soldier+Image');
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    opacity: 0.9;
+  }
+}
+
+// Test button
+.test-button {
+  margin-top: 1rem;
+  width: 100%;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #45a049;
+  }
+}
+
+// Responsive styles
+@media (max-width: 992px) {
+  .main-content {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .left-content {
+    padding-right: 0;
+  }
+
+  .description {
+    max-width: 100%;
+  }
+
+  .job-cards {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .soldier-image-container {
+    width: 300px;
+    height: 375px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .job-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .job-card {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .soldier-image-container {
+    width: 250px;
+    height: 312px;
+  }
+}

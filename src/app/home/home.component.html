@@ -1,27 +1,13 @@
 <div class="landing-page">
-  <div class="header">
-    <div class="logo-container">
-      <img src="assets/logo.svg" alt="Logo" class="logo">
-    </div>
-    <div class="nav-links">
-      <ng-container *ngIf="!authService.isLoggedIn(); else loggedInLinks">
-        <a routerLink="/auth/login" class="nav-link">ورود</a>
-        <a routerLink="/auth/register" class="nav-link">ثبت نام</a>
-      </ng-container>
-      <ng-template #loggedInLinks>
-        <a routerLink="/profile" class="nav-link">پروفایل</a>
-        <a href="javascript:void(0)" class="nav-link" (click)="logout()">خروج</a>
-      </ng-template>
-      <a href="#" class="nav-link">راهنمای سامانه</a>
-    </div>
-  </div>
+  <app-header></app-header>
 
   <div class="main-content">
     <div class="left-content">
       <h1 class="main-title">سامانه رزومه آجا</h1>
-      <p class="description">سامانه رزومه آجا به شما کمک میکند تا به راحتی رزومه خود را ایجاد کنید و آن را به صورت آنلاین ارسال کنید.</p>
-      <button pButton class="submit-button" label="ساخت رزومه جدید"></button>
-      
+      <p class="description">سامانه رزومه آجا به شما کمک میکند تا به راحتی رزومه خود را ایجاد کنید و آن را به صورت
+        آنلاین ارسال کنید.</p>
+      <button pButton class="submit-button" (click)="openResume()" label="ساخت رزومه جدید"></button>
+
       <h2 class="jobs-title">قابلیت ها</h2>
       <div class="job-cards">
         <div class="job-card">
@@ -36,14 +22,14 @@
           <h3>بررسی دقیق</h3>
           <p>بررسی زرومه توسط هوش ممنوعی</p>
         </div>
-        <div class="job-card" *ngIf="authService.isLoggedIn()">
+      </div>
+      <div class="actions">
+        <div class="job-card vertical" *ngIf="authService.isLoggedIn()">
           <h3>تست روانشناسی</h3>
-          <p>آزمون روانشناسی برای شناخت بهتر خود</p>
           <button pButton class="test-button" label="شروع تست" routerLink="/psychological-test"></button>
         </div>
-        <div class="job-card" *ngIf="authService.isLoggedIn()">
+        <div class="job-card vertical" *ngIf="authService.isLoggedIn()">
           <h3>تست شخصیت شناسی</h3>
-          <p>آزمون شخصیت شناسی برای شناخت ویژگی‌های شخصیتی</p>
           <button pButton class="test-button" label="شروع تست" routerLink="/personality-test"></button>
         </div>
       </div>

@@ -26,7 +26,8 @@
       
       <div class="form-group">
         <label for="password">کلمه عبور</label>
-        <span class="p-password-input-wrapper" style="width: 100%;">
+        <span class="p-input-icon-left">
+          <i class="pi pi-key"></i>
           <input 
             id="password" 
             type="password" 
@@ -62,7 +63,7 @@
       </div>
       
       <div class="links">
-        <a href="javascript:void(0)" class="forgot-password" (click)="forgotPassword()">فراموشی رمز عبور</a>
+        <a class="forgot-password" (click)="forgotPassword($event)">فراموشی رمز عبور</a>
         <a routerLink="/" class="back-to-home">بازگشت به صفحه اصلی</a>
       </div>
 

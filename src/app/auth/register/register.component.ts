@@ -26,7 +26,7 @@ import { ToastService } from '../../services/toast.service';
     ToastModule
   ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.sass'
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
   fullName: string = '';
@@ -49,11 +49,12 @@ export class RegisterComponent {
       this.toastService.error('خطا', 'لطفا تمام فیلدها را پر کنید');
       return;
     }
-
+    
     if (this.password !== this.confirmPassword) {
       this.toastService.error('خطا', 'رمز عبور و تکرار آن مطابقت ندارند');
       return;
     }
+    console.log(123);
 
     if (!this.acceptTerms) {
       this.toastService.error('خطا', 'لطفا قوانین و مقررات را بپذیرید');

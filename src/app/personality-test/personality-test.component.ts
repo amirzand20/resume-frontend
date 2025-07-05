@@ -2,68 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-personality-test',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
-  template: `
-    <div class="container mt-4">
-      <h2 class="text-center mb-4">تست شخصیت شناسی</h2>
-      
-      <div *ngIf="!testCompleted" class="card">
-        <div class="card-body">
-          <h5 class="card-title">سوال {{ currentQuestionIndex + 1 }} از {{ questions.length }}</h5>
-          <p class="card-text">{{ currentQuestion.question }}</p>
-          
-          <div class="options">
-            <div *ngFor="let option of currentQuestion.options" class="form-check mb-2">
-              <input class="form-check-input" type="radio" 
-                     [name]="'question' + currentQuestionIndex" 
-                     [id]="'option' + option.value"
-                     [(ngModel)]="selectedAnswer"
-                     [value]="option.value">
-              <label class="form-check-label" [for]="'option' + option.value">
-                {{ option.text }}
-              </label>
-            </div>
-          </div>
-          
-          <button class="btn btn-primary mt-3" 
-                  (click)="nextQuestion()" 
-                  [disabled]="!selectedAnswer">
-            {{ currentQuestionIndex === questions.length - 1 ? 'پایان تست' : 'سوال بعدی' }}
-          </button>
-        </div>
-      </div>
-
-      <div *ngIf="testCompleted" class="card">
-        <div class="card-body text-center">
-          <h3>نتیجه تست شخصیت</h3>
-          <p class="personality-type">نوع شخصیت شما: {{ getPersonalityType() }}</p>
-          <p class="description">{{ getPersonalityDescription() }}</p>
-          <button class="btn btn-primary mt-3" routerLink="/home">بازگشت به خانه</button>
-        </div>
-      </div>
-    </div>
-  `,
-  styles: [`
-    .container
-      max-width: 800px
-      margin: 0 auto
-
-    .options
-      margin: 20px 0
-
-    .personality-type
-      font-size: 24px
-      font-weight: bold
-      margin: 20px 0
-
-    .description
-      font-size: 18px
-      line-height: 1.6
-  `]
+  imports: [   
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    CardModule,
+    ButtonModule,
+    RadioButtonModule],
+  templateUrl: "./personality-test.component.html",
+  styleUrl: "personality-test.component.scss"
 })
 export class PersonalityTestComponent implements OnInit {
   questions = [
@@ -98,7 +52,7 @@ export class PersonalityTestComponent implements OnInit {
   ];
 
   currentQuestionIndex = 0;
-  selectedAnswer: string | null = null;
+  selectedAnswer: any | null = null;
   answers: string[] = [];
   testCompleted = false;
 
@@ -110,11 +64,11 @@ export class PersonalityTestComponent implements OnInit {
     // Initialize the test
   }
 
-  nextQuestion() {
+  nextQuestion() {    
     if (this.selectedAnswer) {
       this.answers.push(this.selectedAnswer);
       this.selectedAnswer = null;
-      
+
       if (this.currentQuestionIndex < this.questions.length - 1) {
         this.currentQuestionIndex++;
       } else {
@@ -122,6 +76,7 @@ export class PersonalityTestComponent implements OnInit {
       }
     }
   }
+  
 
   getPersonalityType(): string {
     return this.answers.join('');

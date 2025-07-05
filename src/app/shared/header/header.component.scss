@@ -1,0 +1,70 @@
+@import "../../../assets/variable.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 3rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo img {
+      height: 40px;
+      aspect-ratio: 1/1;
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+
+      button {
+        color: $primary-color;
+        display: flex;
+        gap: 1rem;
+        padding: 8px 12px;
+        border: 1px solid $primary-color;
+        border-radius: 8px;
+
+        &:hover {
+          background-color: $primary-color;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+
+.logo {
+  width: 40px; aspect-ratio:1/1;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: $text-color;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $accent-color;
+  }
+}

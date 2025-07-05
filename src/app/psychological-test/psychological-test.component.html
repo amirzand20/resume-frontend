@@ -1,0 +1,68 @@
+<div class="test-container">
+  <div class="test-header">
+    <h1>تست روانشناسی</h1>
+    <p class="test-description">این تست به شما کمک می‌کند تا شناخت بهتری از وضعیت روانی خود داشته باشید</p>
+  </div>
+
+  <div *ngIf="!testCompleted" class="test-content">
+    <p-progressBar [value]="progress" [showValue]="false"></p-progressBar>
+
+    <p-card>
+      <div class="question-container">
+        <div class="question-number">
+          سوال {{ currentQuestionIndex + 1 }} از {{ questions.length }}
+        </div>
+
+        <div class="question-text">
+          {{ currentQuestion.question }}
+        </div>
+
+        <div class="options-container">
+          <div *ngFor="let option of currentQuestion.options" class="option-item"
+            [class.selected]="selectedAnswer === option.value">
+            <p-radioButton [name]="'question' + currentQuestionIndex" [value]="option.value"
+              [(ngModel)]="selectedAnswer" [inputId]="'option' + option.value">
+            </p-radioButton>
+            <label [for]="'option' + option.value" class="option-label">
+              {{ option.text }}
+            </label>
+          </div>
+        </div>
+
+        <div class="navigation-buttons">
+          <button pButton *ngIf="currentQuestionIndex > 0" label="سوال قبلی" icon="pi pi-arrow-right"
+            (click)="previousQuestion()" class="p-button-primary">
+          </button>
+          <button pButton label="سوال بعدی" icon="pi pi-arrow-left" (click)="nextQuestion()"
+           class="p-button-primary">
+          </button>
+        </div>
+      </div>
+    </p-card>
+  </div>
+
+  <div *ngIf="testCompleted" class="result-container">
+    <p-card>
+      <div class="result-content">
+        <div class="result-header">
+          <i class="pi pi-check-circle result-icon"></i>
+          <h2>نتیجه تست</h2>
+        </div>
+
+        <div class="score-container">
+          <div class="score-circle">
+            <span class="score-value">{{ score }}</span>
+            <span class="score-max">از {{ maxScore }}</span>
+          </div>
+        </div>
+
+        <div class="interpretation">
+          {{ getScoreInterpretation() }}
+        </div>
+
+        <button pButton label="بازگشت به خانه" icon="pi pi-home" routerLink="/home" class="p-button-primary">
+        </button>
+      </div>
+    </p-card>
+  </div>
+</div>

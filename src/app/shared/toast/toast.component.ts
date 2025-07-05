@@ -9,7 +9,7 @@ import { MessageService } from 'primeng/api';
   imports: [CommonModule, ToastModule],
   providers: [MessageService],
   templateUrl: './toast.component.html',
-  styleUrl: './toast.component.sass'
+  styleUrls: ['./toast.component.scss']
 })
 export class ToastComponent {
   constructor() {}

@@ -14,7 +14,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner'
 @Component({
   selector: 'app-resume-show',
   templateUrl: './resume-show.component.html',
-  styleUrls: ['./resume-show.component.sass'],
+  styleUrls: ['./resume-show.component.scss'],
   standalone: true,
   imports: [CommonModule, ButtonModule, DropdownModule, FormsModule, ToastModule, ProgressSpinnerModule],
   providers: [MessageService]

@@ -1,0 +1,17 @@
+<ng-container [formGroup]="form">
+    <ng-persian-datepicker class="relative" [uiHideAfterSelectDate]="false" [dateInitValue]="false"
+        (dateOnSelect)="onDateChange($event)" #datepickerRef>
+        <!-- *ngIf="showDatepicker" -->
+        <div class="p-float-label">
+            <p-inputMask type="text" id="sd" formControlName="control" mask="9999/99/99" dir="ltr" #inputRef
+                (onInput)="onValChange($event)" (onFocus)="onClick($event)" [disabled]="disabled"></p-inputMask>
+            <label for="sd" class="text-gray-500" *ngIf="label.length !== 0">{{label}}</label>
+        </div>
+    </ng-persian-datepicker>
+    <div class="p-float-label" *ngIf="!showDatepicker">
+        <p-inputMask type="text" id="sd" formControlName="control" [mask]="dataFormatmask" dir="ltr" #inputRef
+            (onInput)="onValChange($event)" (onFocus)="onClick($event)"></p-inputMask>
+        <label for="sd" class="text-gray-500">{{ label }}</label>
+    </div>
+</ng-container>
+<p-toast key="datepicker-toast" position="bottom-left"></p-toast>

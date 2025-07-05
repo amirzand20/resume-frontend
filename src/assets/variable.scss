@@ -1,0 +1,32 @@
+// Centralized SCSS variables for the project
+$primary-color: #1f2159;
+$accent-color: #f0a500;
+$accent-color-dark: #d89400;
+$text-color: #000;
+$card-bg-color: #ffffff;
+$dark-blue: #1f2159;
+$form-bg-color: #ffffff;
+$input-border-color: #ddd;
+$error-color: #f44336;
+$border-color: #ddd;
+$link-color: $accent-color;
+$disabled-color: #ccc;
+$icon-color: #666;
+$muted-color: #6b7280;
+$success-color: #16a34a;
+$background-color: #f9fafb;
+$card-bg: #ffffff;
+$shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$info-color:rgb(0, 136, 255);
+// Stepper variables
+$step-pending: #e5e7eb;
+$step-current: $info-color;
+$step-completed: $success-color;
+$step-label-color: $text-color;
+$step-label-muted: $muted-color;
+$step-connector-pending: $step-pending;
+$step-connector-current: $step-current;
+$step-connector-completed: $step-completed;
+$step-badge-pending: #f3f4f6;
+$step-badge-current: #dbeafe;
+$step-badge-completed: #dcfce7; 
