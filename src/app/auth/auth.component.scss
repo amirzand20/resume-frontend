@@ -54,7 +54,7 @@
   border-radius: 12px;
   padding: 2rem;
   width: 100%;
-  max-width: 450px;
+  min-width: 450px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
 
   // Logo
@@ -63,7 +63,7 @@
     margin-bottom: 2rem;
 
     .logo {
-      width: 120px;
+      width: 40px; aspect-ratio:1/1;
       height: auto;
     }
   }

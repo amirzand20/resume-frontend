@@ -3,43 +3,12 @@
 
 // General styles
 .landing-page {
-  font-family: 'Vazirmatn', sans-serif;
   background-color: $primary-color;
-  color: $text-color;
+  color: white;
   min-height: 100vh;
   direction: rtl;
   overflow-x: hidden;
   position: relative;
-  padding: 2rem;
-}
-
-// Header styles
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-.logo {
-  width: 120px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 2rem;
-}
-
-.nav-link {
-  color: $text-color;
-  text-decoration: none;
-  font-size: 1.2rem;
-  font-weight: 500;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: $accent-color;
-  }
 }
 
 // Main content
@@ -48,11 +17,15 @@
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
+  margin-top: 10rem;
 }
 
 .left-content {
   flex: 1;
   padding-right: 2rem;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .right-content {
@@ -65,14 +38,11 @@
 .main-title {
   font-size: 3.5rem;
   font-weight: 700;
-  margin-bottom: 1rem;
-  color: $text-color;
+  color: white;
 }
 
 .description {
   font-size: 1.2rem;
-  margin-bottom: 2rem;
-  max-width: 80%;
   line-height: 1.6;
 }
 
@@ -85,6 +55,7 @@
   padding: 0.8rem 2.5rem;
   border-radius: 8px;
   cursor: pointer;
+  margin-bottom: 2rem;
   transition: background-color 0.3s ease;
 
   &:hover {
@@ -95,8 +66,7 @@
 .jobs-title {
   font-size: 2.5rem;
   font-weight: 600;
-  margin: 3rem 0 2rem;
-  color: $text-color;
+  color: white;
 }
 
 // Job cards
@@ -105,23 +75,47 @@
   gap: 1.5rem;
 }
 
+.actions{
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+
+  & > *{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    gap: .5rem;
+    
+    h3, button{
+      margin: 0 !important;
+    }
+  }
+}
+
 .job-card {
   background-color: $card-bg-color;
   border-radius: 12px;
   padding: 1.5rem;
   min-width: 200px;
   color: $primary-color;
+  width: fit-content;
 
   h3 {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1rem;
     color: $primary-color;
+    white-space: nowrap;
   }
 
   p {
     color: #666;
     margin-bottom: 0.5rem;
+  }
+
+  &.vertical{
+    display: flex;
   }
 }
 

@@ -17,11 +17,23 @@ body {
   width: 100%;
 }
 
+app-root {
+  height: 100%;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+app-psychological-test {
+  display: contents;
+}
+
 /* Global styles */
 body {
   background-color: #1f2159;
   // color: #ffffff;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 // Global Toast Styles
@@ -161,11 +173,4 @@ button {
       }
     }
   }
-}
-
-::ng-deep p-inputnumber .p-inputnumber-button-group {
-  inset-block-start: 5px !important;
-  inset-inline-end: 5px !important;
-  height: calc(100% - 10px) !important;
-  left: 10px !important;
 }
