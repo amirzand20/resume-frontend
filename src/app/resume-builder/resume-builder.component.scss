@@ -781,6 +781,13 @@ body,
   }
 }
 
+p-inputnumber ::ng-deep .p-inputnumber-button-group {
+  inset-block-start: 5px !important;
+  inset-inline-end: 5px !important;
+  height: calc(100% - 10px) !important;
+  left: 10px !important;
+}
+
 // Responsive styles for stepper
 @media (max-width: 1200px) {
   .resume-builder-container {

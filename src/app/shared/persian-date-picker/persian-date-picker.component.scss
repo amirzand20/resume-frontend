@@ -34,6 +34,7 @@ ng-persian-datepicker ::ng-deep{
         position: relative;
     }
     .datepicker-outer-container {
+        z-index: 99999;
         position: absolute;
         top: calc(100% + 10px);
     }

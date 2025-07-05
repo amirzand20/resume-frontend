@@ -124,3 +124,48 @@ input {
 
   }
 }
+
+button {
+  &.p-button-outlined {
+    padding: .5rem 1rem;
+    display: flex;
+    gap: .5rem;
+    border-radius: 8px;
+    border: 1px solid black;
+
+    &:hover {
+      border: 1px solid black !important;
+      color: white !important;
+      cursor: pointer;
+    }
+
+    &.p-button-danger {
+
+      color: $error-color;
+      border-color: $error-color;
+
+      &:hover {
+        background-color: $error-color !important;
+        border-color: $error-color !important;
+      }
+    }
+
+    &.p-button-info {
+
+      color: $info-color;
+      border-color: $info-color;
+
+      &:hover {
+        background-color: $info-color !important;
+        border-color: $info-color !important;
+      }
+    }
+  }
+}
+
+::ng-deep p-inputnumber .p-inputnumber-button-group {
+  inset-block-start: 5px !important;
+  inset-inline-end: 5px !important;
+  height: calc(100% - 10px) !important;
+  left: 10px !important;
+}

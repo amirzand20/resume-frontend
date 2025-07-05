@@ -79,7 +79,7 @@ interface ToastMessage {
 })
 export class ResumeBuilderComponent implements OnInit {
   resumeForm: FormGroup
-  currentStep = 1
+  currentStep = 3
   steps: StepItem[] = [
     { label: 'اطلاعات شخصی', command: () => this.currentStep = 0 },
     { label: 'اطلاعات تحصیلی', command: () => this.currentStep = 1 },

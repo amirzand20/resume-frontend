@@ -167,7 +167,7 @@
       <div *ngIf="currentStep === 1" class="form-section">
         <div class="section-header">
           <h2>تحصیلات</h2>
-          <button type="button" pButton icon="pi pi-plus" label="افزودن تحصیلات" (click)="addEducation()" class="p-button-outlined"></button>
+          <button type="button" pButton icon="pi pi-plus" label="افزودن تحصیلات" (click)="addEducation()" class="p-button-info p-button-outlined"></button>
         </div>
         <div formArrayName="education" *ngFor="let edu of educationFormArray.controls; let i = index" [formGroupName]="i" class="education-item">
           <div class="form-grid">
@@ -210,7 +210,7 @@
       <div *ngIf="currentStep === 2" class="form-section">
         <div class="section-header">
           <h2>مهارت‌ها</h2>
-          <button type="button" pButton icon="pi pi-plus" label="افزودن مهارت" (click)="addSkill()" class="p-button-outlined"></button>
+          <button type="button" pButton icon="pi pi-plus" label="افزودن مهارت" (click)="addSkill()" class="p-button-outlined p-button-info"></button>
         </div>
         <div formArrayName="skills" *ngFor="let skill of skillsFormArray.controls; let i = index" [formGroupName]="i" class="skill-item">
           <div class="form-grid">
