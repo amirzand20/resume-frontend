@@ -14,6 +14,10 @@ body,
   padding: 2rem;
   min-height: 100vh;
   background: $background-color;
+  overflow: auto;
+  height: 100vh;
+  margin-top: 15vh;
+  padding-bottom: 15vh;
 
   // Header Section
   .resume-builder-header {
@@ -595,6 +599,7 @@ body,
   ul {
     p-dropdownitem {
       padding: .5rem;
+
       &:hover {
         border-radius: 8px;
         background-color: $input-border-color;

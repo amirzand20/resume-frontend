@@ -79,7 +79,7 @@ interface ToastMessage {
 })
 export class ResumeBuilderComponent implements OnInit {
   resumeForm: FormGroup
-  currentStep = 3
+  currentStep = 0
   steps: StepItem[] = [
     { label: 'اطلاعات شخصی', command: () => this.currentStep = 0 },
     { label: 'اطلاعات تحصیلی', command: () => this.currentStep = 1 },
@@ -89,6 +89,11 @@ export class ResumeBuilderComponent implements OnInit {
     { label: 'دوره‌های آموزشی', command: () => this.currentStep = 5 },
     { label: 'افتخارات', command: () => this.currentStep = 6 },
     { label: 'تکمیل', command: () => this.currentStep = 7 }
+  ]
+
+  sex = [
+    { label: 'مرد', value: 1 },
+    { label: 'زن', value: 0 },
   ]
 
   educationLevels = [
@@ -113,24 +118,32 @@ export class ResumeBuilderComponent implements OnInit {
   ) {
     this.resumeForm = this.fb.group({
       // اطلاعات شخصی
-      nationalId: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      nationalNo: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       firstName: ['', [Validators.required, Validators.pattern(/^[\u0600-\u06FF\s]+$/)]],
       lastName: ['', [Validators.required, Validators.pattern(/^[\u0600-\u06FF\s]+$/)]],
       fatherName: ['', [Validators.required, Validators.pattern(/^[\u0600-\u06FF\s]+$/)]],
       birthDate: [null, Validators.required],
-      birthCity: ['', Validators.required],
-      currentCity: ['', Validators.required],
+      birthPlaceId: [null, Validators.required],
+      locationPlaceId: [null, Validators.required],
       profileImage: [null],
-      phone: ['', [Validators.required, Validators.pattern(/^09[0-9]{9}$/)]],
-      email: ['', [Validators.required, Validators.email]],
+      mobileNumber: ['', [Validators.required, Validators.pattern(/^09[0-9]{9}$/)]],
+      telephoneNumber: ['', [Validators.required, Validators.pattern(/^0[0-9]{10}$/)]],
+      emailAddress: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required],
+      postCode: [''],
+      sexId: [''],
 
       // اطلاعات تحصیلی
       education: this.fb.array([]),
 
+      // اطلاعات تماس
+      contract: this.fb.group({}),
+
       // مهارت‌ها
       skills: this.fb.array([])
     })
+
+    this.addContract()
   }
 
   ngOnInit() {
@@ -139,6 +152,10 @@ export class ResumeBuilderComponent implements OnInit {
 
   get educationFormArray() {
     return this.resumeForm.get('education') as FormArray
+  }
+
+  get contractFormArray() {
+    return this.resumeForm.get('contract') as FormGroup
   }
 
   get skillsFormArray() {
@@ -157,6 +174,29 @@ export class ResumeBuilderComponent implements OnInit {
     })
 
     this.educationFormArray.push(educationForm)
+  }
+
+  addContract() {
+    const contractForm = this.fb.group({
+      locationPlaceId: ['', Validators.required],
+      locationAddress: ['', Validators.required],
+      mobileNumber: ['', Validators.required],
+      telephoneNumber: ['', Validators.required],
+      postCode: ['', Validators.required],
+      fatherMobileNumber: ['', Validators.required],
+      motherMobileNumber: ['', Validators.required],
+      emailAddress: ['', Validators.required],
+      familiarMobileNumber: ['', Validators.required],
+      createdMethodId: [1, Validators.required],
+      tableId: ["123e4567-e89b-12d3-a456-426614174000", Validators.required],
+      isActive: [true, Validators.required],
+      createdBy: ["123e4567-e89b-12d3-a456-426614174000", Validators.required]
+    })
+
+    // Replace the empty contract FormGroup with the populated one
+    this.resumeForm.setControl('contract', contractForm);
+
+    console.log(this.resumeForm);
   }
 
   removeEducation(index: number) {
@@ -187,6 +227,7 @@ export class ResumeBuilderComponent implements OnInit {
   }
 
   validateCurrentStep(): boolean {
+    // return true
     let isValid = true
     const controls = this.getCurrentStepControls()
 
@@ -205,26 +246,31 @@ export class ResumeBuilderComponent implements OnInit {
     return true
   }
 
+
+
   nextStep() {
-    if (this.validateCurrentStep()) {
-      if (this.currentStep === 0) {
+    if (this.currentStep === 0) {
+      if (this.validateCurrentStep()) {
         // Get the personal information data
         const personalInfo = {
-          nationalId: this.resumeForm.get('nationalId')?.value,
+          nationalNo: this.resumeForm.get('nationalNo')?.value,
           firstName: this.resumeForm.get('firstName')?.value,
           lastName: this.resumeForm.get('lastName')?.value,
-          fatherName: this.resumeForm.get('fatherName')?.value,
           birthDate: this.resumeForm.get('birthDate')?.value,
-          birthCity: this.resumeForm.get('birthCity')?.value,
-          currentCity: this.resumeForm.get('currentCity')?.value,
-          phone: this.resumeForm.get('phone')?.value,
-          email: this.resumeForm.get('email')?.value,
-          address: this.resumeForm.get('address')?.value
+          birthPlaceId: this.resumeForm.get('birthPlaceId')?.value,
+          locationPlaceId: this.resumeForm.get('locationPlaceId')?.value,
+          mobileNumber: this.resumeForm.get('mobileNumber')?.value,
+          telephoneNumber: this.resumeForm.get('telephoneNumber')?.value,
+          emailAddress: this.resumeForm.get('emailAddress')?.value,
+          address: this.resumeForm.get('address')?.value,
+          postCode: this.resumeForm.get('postCode')?.value,
+          sexId: this.resumeForm.get('sexId')?.value
         };
 
         // Call the API
         this.resumeService.submitStep1(personalInfo).subscribe({
           next: () => {
+            this.addContract(); // Initialize contract controls BEFORE moving to step 1
             this.currentStep++;
             this.showToast('success', 'موفق', 'اطلاعات با موفقیت ذخیره شد');
           },
@@ -233,11 +279,45 @@ export class ResumeBuilderComponent implements OnInit {
             console.error('Error submitting step 1:', error);
           }
         });
-      } else {
-        this.currentStep++;
-        this.showToast('info', 'مرحله بعدی', `شما در حال حاضر در مرحله ${this.currentStep + 1} از 8 هستید`);
       }
+    } else if (this.currentStep == 1) {
+      console.log(this.contractFormArray);
+      
+      const contractForm = {
+        locationPlaceId: this.contractFormArray.get("locationPlaceId")?.value,
+        locationAddress: this.contractFormArray.get("locationAddress")?.value,
+        mobileNumber: this.contractFormArray.get("mobileNumber")?.value,
+        telephoneNumber: this.contractFormArray.get("telephoneNumber")?.value,
+        postCode: this.contractFormArray.get("postCode")?.value,
+        fatherMobileNumber: this.contractFormArray.get("fatherMobileNumber")?.value,
+        motherMobileNumber: this.contractFormArray.get("motherMobileNumber")?.value,
+        emailAddress: this.contractFormArray.get("emailAddress")?.value,
+        familiarMobileNumber: this.contractFormArray.get("familiarMobileNumber")?.value,
+        createdMethodId: this.contractFormArray.get("createdMethodId")?.value,
+        tableId: this.contractFormArray.get("tableId")?.value,
+        isActive: this.contractFormArray.get("isActive")?.value,
+        createdBy: this.contractFormArray.get("createdBy")?.value,
+      }
+
+      console.log(contractForm);
+      // Call the API
+      this.resumeService.submitStep2(contractForm).subscribe({
+        next: () => {
+          this.currentStep++;
+          this.showToast('success', 'موفق', 'اطلاعات با موفقیت ذخیره شد');
+        },
+        error: (error) => {
+          this.showToast('error', 'خطا', 'خطا در ذخیره اطلاعات');
+          console.error('Error submitting step 2:', error);
+        }
+      });
+
     }
+    else {
+      this.currentStep++;
+      this.showToast('info', 'مرحله بعدی', `شما در حال حاضر در مرحله ${this.currentStep + 1} از 8 هستید`);
+    }
+
   }
 
   prevStep() {
@@ -254,15 +334,17 @@ export class ResumeBuilderComponent implements OnInit {
           this.resumeForm.get('lastName'),
           this.resumeForm.get('fatherName'),
           this.resumeForm.get('birthDate'),
-          this.resumeForm.get('birthCity'),
-          this.resumeForm.get('currentCity'),
+          this.resumeForm.get('birthPlaceId'),
+          this.resumeForm.get('locationPlaceId'),
           this.resumeForm.get('phone'),
           this.resumeForm.get('email'),
           this.resumeForm.get('address')
         ].filter(control => control !== null) as any[]
       case 1:
-        return this.educationFormArray.controls
+        return Object.values(this.contractFormArray.controls)
       case 2:
+        return this.educationFormArray.controls
+      case 3:
         return this.skillsFormArray.controls
       default:
         return []

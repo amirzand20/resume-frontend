@@ -74,7 +74,7 @@ export interface Resume {
   providedIn: 'root'
 })
 export class ResumeService {
-  private apiUrl = 'http://localhost:3000/resume';
+  private apiUrl = 'http://localhost:3000/';
 
   // Mock data for testing
   private mockResumes: Resume[] = [
@@ -222,10 +222,14 @@ export class ResumeService {
   }
 
   submitStep1(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/step1`, data);
+    return this.http.post(`${this.apiUrl}step1`, data);
+  }
+
+  submitStep2(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}step2`, data);
   }
 
   createNewResume(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/step1/create`, {});
+    return this.http.post(`${this.apiUrl}step1/create`, {});
   }
 } 
