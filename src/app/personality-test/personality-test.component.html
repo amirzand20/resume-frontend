@@ -1,0 +1,44 @@
+<div class="test-container">
+  <div class="test-header">
+    <h1>تست شخصیت شناسی</h1>
+  </div>
+
+
+  <div *ngIf="!testCompleted" class="test-content">
+    <p-card>
+      <div class="question-container">
+        <div class="question-number">
+          سوال {{ currentQuestionIndex + 1 }} از {{ questions.length }}
+        </div>
+        <div class="question-text">
+          {{ currentQuestion.question }}
+        </div>
+        <div class="options-container">
+          <div *ngFor="let option of currentQuestion.options" class="option-item" 
+          [class.selected]="selectedAnswer === option.value">
+            <p-radioButton [name]="'question' + currentQuestionIndex" [value]="option.value"
+              [(ngModel)]="selectedAnswer" [inputId]="'option' + option.value">
+            </p-radioButton>
+            <label [for]="'option' + option.value" class="option-label">
+              {{ option.text }}
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="navigation-buttons">
+        <button pButton label="سوال بعدی" icon="pi pi-arrow-left" (click)="nextQuestion()" class="p-button-primary">
+        </button>
+      </div>
+    </p-card>
+  </div>
+
+  <div *ngIf="testCompleted">
+    <div class="result">
+      <h3>نتیجه تست شخصیت</h3>
+      <p class="personality-type">نوع شخصیت شما: {{ getPersonalityType() }}</p>
+      <p class="description">{{ getPersonalityDescription() }}</p>
+      <button class="btn btn-primary mt-3" routerLink="/home">بازگشت به خانه</button>
+    </div>
+  </div>
+</div>
