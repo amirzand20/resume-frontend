@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { ResumeService } from '../services/resume.service';
 import { ToastService } from '../services/toast.service';
+import { PdfService } from '../services/pdf.service';
 
 @Component({
   selector: 'app-step8',
@@ -38,14 +39,14 @@ import { ToastService } from '../services/toast.service';
   `]
 })
 export class Step8Component {
-  constructor(private resumeService: ResumeService, private toast: ToastService) {}
+  constructor(private resumeService: ResumeService, private toast: ToastService, private pdfService: PdfService) {}
 
   downloadResume() {
     // Replace 1 with actual resume id as needed
     this.resumeService.reportResume(1).subscribe({
       next: (res) => {
         this.toast.success('موفق', 'رزومه با موفقیت دریافت شد!');
-        // handle file download if needed
+        this.pdfService.generateResumePdf(res);
       },
       error: (err) => {
         this.toast.error('خطا', err?.message || 'خطا در دریافت رزومه');

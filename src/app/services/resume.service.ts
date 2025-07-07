@@ -261,6 +261,6 @@ export class ResumeService {
   }
 
   reportResume(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}report/resume/${id}`)
+    return this.http.get(`${this.apiUrl}report/resume/1`)
   }
 } 
