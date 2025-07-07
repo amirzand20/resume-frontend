@@ -6,18 +6,25 @@ import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { PersianDatePickerComponent } from '../../shared/persian-date-picker/persian-date-picker.component';
+import { ResumeService } from '../../services/resume.service';
+import { ToastService } from '../../services/toast.service';
+import { DropdownModule } from 'primeng/dropdown';
+import { JOB_TYPE_OPTIONS } from '../../data/job-type-options';
+import { OTHER_OPTIONS } from '../../data/other-options';
 
 @Component({
   selector: 'app-step4',
   templateUrl: './step4.component.html',
   styleUrls: ['./step4.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputTextModule, ButtonModule, PersianDatePickerComponent]
+  imports: [CommonModule, ReactiveFormsModule, InputTextModule, ButtonModule, PersianDatePickerComponent, DropdownModule]
 })
 export class Step4Component implements OnInit {
   step4Form!: FormGroup;
+  jobTypeOptions = JOB_TYPE_OPTIONS;
+  jobOrganOptions = OTHER_OPTIONS;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {}
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private resumeService: ResumeService, private toast: ToastService) {}
 
   ngOnInit(): void {
     this.step4Form = this.fb.group({
@@ -37,6 +44,17 @@ export class Step4Component implements OnInit {
     this.router.navigate(['../step3'], { relativeTo: this.route });
   }
   goToNextStep() {
-    this.router.navigate(['../step5'], { relativeTo: this.route });
+    if (this.step4Form.invalid) {
+      this.step4Form.markAllAsTouched();
+      return;
+    }
+    this.resumeService.submitStep4(this.step4Form.value).subscribe({
+      next: () => {
+        this.router.navigate(['../step5'], { relativeTo: this.route });
+      },
+      error: (err) => {
+        this.toast.error('خطا', err?.message || 'خطا در ثبت اطلاعات');
+      }
+    });
   }
 } 

@@ -9,7 +9,7 @@
 
   <div class="form-group">
     <label for="languageId">کد زبان</label>
-    <input id="languageId" type="number" formControlName="languageId" />
+    <p-dropdown id="languageId" [options]="languageOptions" optionLabel="title" optionValue="id" formControlName="languageId" placeholder="انتخاب زبان"></p-dropdown>
     <div class="error-message" *ngIf="step6Form.get('languageId')?.errors?.['required'] && step6Form.get('languageId')?.touched">
       کد زبان الزامی است
     </div>

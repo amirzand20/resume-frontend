@@ -9,7 +9,7 @@
 
   <div class="form-group">
     <label for="skillTypeId">کد نوع مهارت</label>
-    <input id="skillTypeId" type="number" formControlName="skillTypeId" />
+    <p-dropdown id="skillTypeId" [options]="skillTypeOptions" optionLabel="title" optionValue="id" formControlName="skillTypeId" placeholder="انتخاب نوع مهارت"></p-dropdown>
     <div class="error-message" *ngIf="step5Form.get('skillTypeId')?.errors?.['required'] && step5Form.get('skillTypeId')?.touched">
       کد نوع مهارت الزامی است
     </div>

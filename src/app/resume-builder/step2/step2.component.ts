@@ -7,6 +7,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { CITY_OPTIONS } from '../../data/city-options';
+import { ResumeService } from '../../services/resume.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-step2',
@@ -19,7 +21,7 @@ export class Step2Component implements OnInit {
   step2Form!: FormGroup;
   cityOptions = CITY_OPTIONS;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {}
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private resumeService: ResumeService, private toast: ToastService) {}
 
   ngOnInit(): void {
     this.step2Form = this.fb.group({
@@ -44,6 +46,19 @@ export class Step2Component implements OnInit {
     this.router.navigate(['../step1'], { relativeTo: this.route });
   }
   goToNextStep() {
-    this.router.navigate(['../step3'], { relativeTo: this.route });
+    console.log(123);
+    
+    if (this.step2Form.invalid) {
+      this.step2Form.markAllAsTouched();
+      return;
+    }
+    this.resumeService.submitStep2(this.step2Form.value).subscribe({
+      next: () => {
+        this.router.navigate(['../step3'], { relativeTo: this.route });
+      },
+      error: (err) => {
+        this.toast.error('خطا', err?.message || 'خطا در ثبت اطلاعات');
+      }
+    });
   }
 } 

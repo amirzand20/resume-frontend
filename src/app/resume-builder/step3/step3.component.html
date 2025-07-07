@@ -1,15 +1,15 @@
 <form [formGroup]="step3Form">
     <div class="form-group">
-      <label for="employeeTypeId">کد نوع کارمند</label>
-      <input id="employeeTypeId" type="number" formControlName="employeeTypeId" />
+      <label for="employeeTypeId"> نوع کارمند</label>
+      <p-dropdown id="employeeTypeId" [options]="employeeTypeOptions" optionLabel="title" optionValue="id" formControlName="employeeTypeId" placeholder="انتخاب نوع کارمند"></p-dropdown>
       <div class="error-message" *ngIf="step3Form.get('employeeTypeId')?.errors?.['required'] && step3Form.get('employeeTypeId')?.touched">
-        کد نوع کارمند الزامی است
+         نوع کارمند الزامی است
       </div>
     </div>
   
     <div class="form-group">
       <label for="employeeForceId">کد نیروی کارمند</label>
-      <input id="employeeForceId" type="number" formControlName="employeeForceId" />
+      <p-dropdown id="employeeForceId" [options]="employeeForceOptions" optionLabel="title" optionValue="id" formControlName="employeeForceId" placeholder="انتخاب نوع نیرو"></p-dropdown>
       <div class="error-message" *ngIf="step3Form.get('employeeForceId')?.errors?.['required'] && step3Form.get('employeeForceId')?.touched">
         کد نیروی کارمند الزامی است
       </div>
@@ -40,8 +40,8 @@
     </div>
   
     <div class="form-group">
-      <label for="recruitmentStatusId">کد وضعیت استخدام</label>
-      <input id="recruitmentStatusId" type="number" formControlName="recruitmentStatusId" />
+      <label for="recruitmentStatusId"> وضعیت استخدام</label>
+      <p-dropdown id="recruitmentStatusId" [options]="recruitmentStatusOptions" optionLabel="title" optionValue="id" formControlName="recruitmentStatusId" placeholder="انتخاب وضعیت"></p-dropdown>
       <div class="error-message" *ngIf="step3Form.get('recruitmentStatusId')?.errors?.['required'] && step3Form.get('recruitmentStatusId')?.touched">
         کد وضعیت استخدام الزامی است
       </div>

@@ -5,18 +5,23 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { ResumeService } from '../../services/resume.service';
+import { ToastService } from '../../services/toast.service';
+import { DropdownModule } from 'primeng/dropdown';
+import { LANGUAGE_OPTIONS } from '../../data/language-options';
 
 @Component({
   selector: 'app-step6',
   templateUrl: './step6.component.html',
   styleUrls: ['./step6.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputTextModule, ButtonModule]
+  imports: [CommonModule, ReactiveFormsModule, InputTextModule, ButtonModule, DropdownModule]
 })
 export class Step6Component implements OnInit {
   step6Form!: FormGroup;
+  languageOptions = LANGUAGE_OPTIONS;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {}
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private resumeService: ResumeService, private toast: ToastService) {}
 
   ngOnInit(): void {
     this.step6Form = this.fb.group({
@@ -36,6 +41,17 @@ export class Step6Component implements OnInit {
     this.router.navigate(['../step5'], { relativeTo: this.route });
   }
   goToNextStep() {
-    this.router.navigate(['../step7'], { relativeTo: this.route });
+    if (this.step6Form.invalid) {
+      this.step6Form.markAllAsTouched();
+      return;
+    }
+    this.resumeService.submitStep6(this.step6Form.value).subscribe({
+      next: () => {
+        this.router.navigate(['../step7'], { relativeTo: this.route });
+      },
+      error: (err) => {
+        this.toast.error('خطا', err?.message || 'خطا در ثبت اطلاعات');
+      }
+    });
   }
 } 

@@ -17,7 +17,7 @@
 
   <div class="form-group">
     <label for="jobTypeId">کد نوع شغل</label>
-    <input id="jobTypeId" type="number" formControlName="jobTypeId" />
+    <p-dropdown id="jobTypeId" [options]="jobTypeOptions" optionLabel="title" optionValue="id" formControlName="jobTypeId" placeholder="انتخاب نوع شغل"></p-dropdown>
     <div class="error-message" *ngIf="step4Form.get('jobTypeId')?.errors?.['required'] && step4Form.get('jobTypeId')?.touched">
       کد نوع شغل الزامی است
     </div>
@@ -25,7 +25,7 @@
 
   <div class="form-group">
     <label for="jobOrganId">کد سازمان شغلی</label>
-    <input id="jobOrganId" type="number" formControlName="jobOrganId" />
+    <p-dropdown id="jobOrganId" [options]="jobOrganOptions" optionLabel="title" optionValue="id" formControlName="jobOrganId" placeholder="انتخاب سازمان"></p-dropdown>
     <div class="error-message" *ngIf="step4Form.get('jobOrganId')?.errors?.['required'] && step4Form.get('jobOrganId')?.touched">
       کد سازمان شغلی الزامی است
     </div>

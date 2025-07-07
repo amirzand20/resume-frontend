@@ -259,4 +259,8 @@ export class ResumeService {
   createNewResume(): Observable<any> {
     return this.http.post(`${this.apiUrl}step1/create`, {});
   }
+
+  reportResume(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}report/resume/${id}`)
+  }
 } 

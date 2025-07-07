@@ -10,6 +10,8 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { DropdownModule } from 'primeng/dropdown';
 import { SEX_OPTIONS } from '../../data/sex-options';
 import { CITY_OPTIONS } from '../../data/city-options';
+import { ResumeService } from '../../services/resume.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-step1',
@@ -23,7 +25,7 @@ export class Step1Component implements OnInit {
   sexOptions = SEX_OPTIONS;
   cityOptions = CITY_OPTIONS;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {}
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private resumeService: ResumeService, private toast: ToastService) {}
 
   ngOnInit(): void {
     this.step1Form = this.fb.group({
@@ -52,6 +54,17 @@ export class Step1Component implements OnInit {
   }
 
   goToNextStep() {
-    this.router.navigate(['../step2'], { relativeTo: this.route });
+    if (this.step1Form.invalid) {
+      this.step1Form.markAllAsTouched();
+      return;
+    }
+    this.resumeService.submitStep1(this.step1Form.value).subscribe({
+      next: () => {
+        this.router.navigate(['../step2'], { relativeTo: this.route });
+      },
+      error: (err) => {
+        this.toast.error('خطا', err?.message || 'خطا در ثبت اطلاعات');
+      }
+    });
   }
 } 

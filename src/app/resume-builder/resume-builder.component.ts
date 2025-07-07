@@ -4,13 +4,14 @@ import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { StepsModule } from 'primeng/steps';
 import { HeaderComponent } from '../shared/header/header.component';
 import { CardModule } from 'primeng/card';
+import { ToastComponent } from '../shared/toast/toast.component';
 
 @Component({
   selector: 'app-resume-builder',
   templateUrl: './resume-builder.component.html',
   styleUrls: ['./resume-builder.component.scss'],
   standalone: true,
-  imports: [StepsModule, RouterModule, HeaderComponent, CardModule]
+  imports: [StepsModule, RouterModule, HeaderComponent, CardModule, ToastComponent]
 })
 export class ResumeBuilderComponent {
   steps = [
@@ -20,7 +21,8 @@ export class ResumeBuilderComponent {
     { label: 'سوابق کاری', routerLink: 'step4' },
     { label: 'مهارت‌ها', routerLink: 'step5' },
     { label: 'زبان‌ها', routerLink: 'step6' },
-    { label: 'وضعیت متقاضی', routerLink: 'step7' }
+    { label: 'وضعیت متقاضی', routerLink: 'step7' },
+    { label: 'ثبت نهایی', routerLink: 'step8' }
   ];
   activeIndex = 0;
 
