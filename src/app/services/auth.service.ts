@@ -76,33 +76,34 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    if (!isPlatformBrowser(this.platformId)) {
-      return false;
-    }
+    return true;
+    // if (!isPlatformBrowser(this.platformId)) {
+    //   return false;
+    // }
 
-    const token = this.getToken();
-    if (!token) {
-      console.log('AuthService: No token found');
-      return false;
-    }
+    // const token = this.getToken();
+    // if (!token) {
+    //   console.log('AuthService: No token found');
+    //   return false;
+    // }
 
-    try {
-      const decodedToken = jwtDecode<DecodedToken>(token);
-      const currentTime = Date.now() / 1000;
+    // try {
+    //   const decodedToken = jwtDecode<DecodedToken>(token);
+    //   const currentTime = Date.now() / 1000;
       
-      if (decodedToken.exp < currentTime) {
-        console.log('AuthService: Token expired');
-        this.logout();
-        return false;
-      }
+    //   if (decodedToken.exp < currentTime) {
+    //     console.log('AuthService: Token expired');
+    //     this.logout();
+    //     return false;
+    //   }
       
-      console.log('AuthService: Token valid');
-      return true;
-    } catch (error) {
-      console.error('AuthService: Error decoding token:', error);
-      this.logout();
-      return false;
-    }
+    //   console.log('AuthService: Token valid');
+    //   return true;
+    // } catch (error) {
+    //   console.error('AuthService: Error decoding token:', error);
+    //   this.logout();
+    //   return false;
+    // }
   }
 
   logout(): void {

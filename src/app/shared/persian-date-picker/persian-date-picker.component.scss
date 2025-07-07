@@ -13,13 +13,22 @@ p-inputmask .p-inputtext {
         width: 100% !important;
     }
 
+    .p-inputtext {
+        padding: 0.75rem;
+    }
+
+    .datepicker-content{
+        padding: unset !important;
+        border: unset !important;
+    }
+
     .p-tooltip {
         width: auto;
         min-width: max-content !important;
     }
 }
 
-ng-persian-datepicker ::ng-deep{
+ng-persian-datepicker ::ng-deep {
 
     .datepicker-content {
         width: 100%;
@@ -33,6 +42,7 @@ ng-persian-datepicker ::ng-deep{
         transition: all 0.3s ease;
         position: relative;
     }
+
     .datepicker-outer-container {
         z-index: 99999;
         position: absolute;

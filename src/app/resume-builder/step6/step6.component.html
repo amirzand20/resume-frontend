@@ -1,0 +1,53 @@
+<form [formGroup]="step6Form">
+  <div class="form-group">
+    <label for="personId">شناسه فرد</label>
+    <input id="personId" type="number" formControlName="personId" />
+    <div class="error-message" *ngIf="step6Form.get('personId')?.errors?.['required'] && step6Form.get('personId')?.touched">
+      شناسه فرد الزامی است
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="languageId">کد زبان</label>
+    <input id="languageId" type="number" formControlName="languageId" />
+    <div class="error-message" *ngIf="step6Form.get('languageId')?.errors?.['required'] && step6Form.get('languageId')?.touched">
+      کد زبان الزامی است
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="readingLevel">سطح خواندن</label>
+    <input id="readingLevel" type="number" formControlName="readingLevel" />
+    <div class="error-message" *ngIf="step6Form.get('readingLevel')?.errors?.['required'] && step6Form.get('readingLevel')?.touched">
+      سطح خواندن الزامی است
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="writingLevel">سطح نوشتن</label>
+    <input id="writingLevel" type="number" formControlName="writingLevel" />
+    <div class="error-message" *ngIf="step6Form.get('writingLevel')?.errors?.['required'] && step6Form.get('writingLevel')?.touched">
+      سطح نوشتن الزامی است
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="speakingLevel">سطح صحبت کردن</label>
+    <input id="speakingLevel" type="number" formControlName="speakingLevel" />
+    <div class="error-message" *ngIf="step6Form.get('speakingLevel')?.errors?.['required'] && step6Form.get('speakingLevel')?.touched">
+      سطح صحبت کردن الزامی است
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="listeningLevel">سطح شنیدن</label>
+    <input id="listeningLevel" type="number" formControlName="listeningLevel" />
+    <div class="error-message" *ngIf="step6Form.get('listeningLevel')?.errors?.['required'] && step6Form.get('listeningLevel')?.touched">
+      سطح شنیدن الزامی است
+    </div>
+  </div>
+  <div class="step-buttons">
+    <button type="button" (click)="goToPreviousStep()" pButton class="p-button-primary">قبلی</button>
+    <button type="button" (click)="goToNextStep()" pButton class="p-button-primary">بعدی</button>
+  </div>
+</form> 

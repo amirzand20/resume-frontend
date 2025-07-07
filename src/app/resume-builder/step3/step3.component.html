@@ -1,0 +1,55 @@
+<form [formGroup]="step3Form">
+    <div class="form-group">
+      <label for="employeeTypeId">کد نوع کارمند</label>
+      <input id="employeeTypeId" type="number" formControlName="employeeTypeId" />
+      <div class="error-message" *ngIf="step3Form.get('employeeTypeId')?.errors?.['required'] && step3Form.get('employeeTypeId')?.touched">
+        کد نوع کارمند الزامی است
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="employeeForceId">کد نیروی کارمند</label>
+      <input id="employeeForceId" type="number" formControlName="employeeForceId" />
+      <div class="error-message" *ngIf="step3Form.get('employeeForceId')?.errors?.['required'] && step3Form.get('employeeForceId')?.touched">
+        کد نیروی کارمند الزامی است
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="title">عنوان</label>
+      <input id="title" type="text" formControlName="title" />
+      <div class="error-message" *ngIf="step3Form.get('title')?.errors?.['required'] && step3Form.get('title')?.touched">
+        عنوان الزامی است
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="startDate">تاریخ شروع</label>
+      <aja-persian-date-picker formControlName="startDate"></aja-persian-date-picker>
+      <div class="error-message" *ngIf="step3Form.get('startDate')?.errors?.['required'] && step3Form.get('startDate')?.touched">
+        تاریخ شروع الزامی است
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="endDate">تاریخ پایان</label>
+      <aja-persian-date-picker formControlName="endDate"></aja-persian-date-picker>
+      <div class="error-message" *ngIf="step3Form.get('endDate')?.errors?.['required'] && step3Form.get('endDate')?.touched">
+        تاریخ پایان الزامی است
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="recruitmentStatusId">کد وضعیت استخدام</label>
+      <input id="recruitmentStatusId" type="number" formControlName="recruitmentStatusId" />
+      <div class="error-message" *ngIf="step3Form.get('recruitmentStatusId')?.errors?.['required'] && step3Form.get('recruitmentStatusId')?.touched">
+        کد وضعیت استخدام الزامی است
+      </div>
+    </div>
+  </form>
+  
+  <div class="step-buttons">
+    <button type="button" (click)="goToPreviousStep()" pButton class="p-button-primary">قبلی</button>
+    <button type="button" (click)="goToNextStep()" pButton class="p-button-primary">بعدی</button>
+  </div>
+  

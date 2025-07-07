@@ -1,0 +1,29 @@
+<form [formGroup]="step5Form">
+  <div class="form-group">
+    <label for="personId">شناسه فرد</label>
+    <input id="personId" type="number" formControlName="personId" />
+    <div class="error-message" *ngIf="step5Form.get('personId')?.errors?.['required'] && step5Form.get('personId')?.touched">
+      شناسه فرد الزامی است
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="skillTypeId">کد نوع مهارت</label>
+    <input id="skillTypeId" type="number" formControlName="skillTypeId" />
+    <div class="error-message" *ngIf="step5Form.get('skillTypeId')?.errors?.['required'] && step5Form.get('skillTypeId')?.touched">
+      کد نوع مهارت الزامی است
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="skillLevel">سطح مهارت</label>
+    <input id="skillLevel" type="number" formControlName="skillLevel" />
+    <div class="error-message" *ngIf="step5Form.get('skillLevel')?.errors?.['required'] && step5Form.get('skillLevel')?.touched">
+      سطح مهارت الزامی است
+    </div>
+  </div>
+  <div class="step-buttons">
+    <button type="button" (click)="goToPreviousStep()" pButton class="p-button-primary">قبلی</button>
+    <button type="button" (click)="goToNextStep()" pButton class="p-button-primary">بعدی</button>
+  </div>
+</form> 

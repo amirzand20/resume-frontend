@@ -2,6 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Step1Interface } from '../interfaces/step1.interface';
+import { Step2Interface } from '../interfaces/step2.interface';
+import { Step3Interface } from '../interfaces/step3.interface';
+import { Step4Interface } from '../interfaces/step4.interface';
+import { Step5Interface } from '../interfaces/step5.interface';
+import { Step6Interface } from '../interfaces/step6.interface';
+import { Step7Interface } from '../interfaces/step7.interface';
 
 export interface Resume {
   id: number;
@@ -200,7 +207,7 @@ export class ResumeService {
     }
   ];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getUserResumes(): Observable<Resume[]> {
     return this.http.get<Resume[]>(`${this.apiUrl}/step1/user-resumes`);
@@ -221,12 +228,32 @@ export class ResumeService {
     return this.http.delete<void>(`${this.apiUrl}/step1/${id}`);
   }
 
-  submitStep1(data: any): Observable<any> {
+  submitStep1(data: Step1Interface): Observable<any> {
     return this.http.post(`${this.apiUrl}step1`, data);
   }
 
-  submitStep2(data: any): Observable<any> {
+  submitStep2(data: Step2Interface): Observable<any> {
     return this.http.post(`${this.apiUrl}step2`, data);
+  }
+
+  submitStep3(data: Step3Interface): Observable<any> {
+    return this.http.post(`${this.apiUrl}step3`, data);
+  }
+
+  submitStep4(data: Step4Interface): Observable<any> {
+    return this.http.post(`${this.apiUrl}step4`, data);
+  }
+
+  submitStep5(data: Step5Interface): Observable<any> {
+    return this.http.post(`${this.apiUrl}step5`, data);
+  }
+
+  submitStep6(data: Step6Interface): Observable<any> {
+    return this.http.post(`${this.apiUrl}step6`, data);
+  }
+
+  submitStep7(data: Step7Interface): Observable<any> {
+    return this.http.post(`${this.apiUrl}step7`, data);
   }
 
   createNewResume(): Observable<any> {
