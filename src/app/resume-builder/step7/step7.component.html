@@ -1,0 +1,21 @@
+<form [formGroup]="step7Form">
+  <div class="form-group">
+    <label for="personId">شناسه فرد</label>
+    <input id="personId" type="number" formControlName="personId" />
+    <div class="error-message" *ngIf="step7Form.get('personId')?.errors?.['required'] && step7Form.get('personId')?.touched">
+      شناسه فرد الزامی است
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="applicantStatusId">کد وضعیت متقاضی</label>
+    <input id="applicantStatusId" type="number" formControlName="applicantStatusId" />
+    <div class="error-message" *ngIf="step7Form.get('applicantStatusId')?.errors?.['required'] && step7Form.get('applicantStatusId')?.touched">
+      کد وضعیت متقاضی الزامی است
+    </div>
+  </div>
+  <div class="step-buttons">
+    <button type="button" (click)="goToPreviousStep()" pButton class="p-button-primary">قبلی</button>
+    <button type="button" (click)="goToNextStep()" pButton class="p-button-primary">بعدی</button>
+  </div>
+</form> 

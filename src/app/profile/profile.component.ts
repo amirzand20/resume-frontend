@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loadResumes();
@@ -98,22 +98,22 @@ export class ProfileComponent implements OnInit {
   }
 
   createNewResume() {
-    this.resumeService.createNewResume().subscribe({
-      next: (response) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'موفق',
-          detail: 'رزومه جدید با موفقیت ایجاد شد'
-        });
-        this.router.navigate(['/resume-builder']);
-      },
-      error: (error) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'خطا',
-          detail: 'خطا در ایجاد رزومه جدید'
-        });
-      }
-    });
+    // this.resumeService.createNewResume().subscribe({
+    //   next: (response) => {
+    //     this.messageService.add({
+    //       severity: 'success',
+    //       summary: 'موفق',
+    //       detail: 'رزومه جدید با موفقیت ایجاد شد'
+    //     });
+    this.router.navigate(['/resume-builder']);
+    //   },
+    //   error: (error) => {
+    //     this.messageService.add({
+    //       severity: 'error',
+    //       summary: 'خطا',
+    //       detail: 'خطا در ایجاد رزومه جدید'
+    //     });
+    //   }
+    // });
   }
 } 

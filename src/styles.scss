@@ -3,6 +3,8 @@
 @import './assets/fonts/font.scss';
 @import './assets/variable.scss';
 
+@import 'primeicons/primeicons.css';
+
 /* Reset CSS */
 * {
   margin: 0;
@@ -25,7 +27,17 @@ app-root {
   justify-content: center;
 }
 
-app-psychological-test, app-profile, app-personality-test {
+app-psychological-test,
+app-profile,
+app-personality-test,
+app-resume-builder,
+app-step1,
+app-step2,
+app-step3,
+app-step4,
+app-step5,
+app-step6,
+app-step7 {
   display: contents;
 }
 

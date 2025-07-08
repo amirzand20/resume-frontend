@@ -1,0 +1,73 @@
+<form [formGroup]="step2Form">
+  <div class="form-group">
+    <label for="personId">شناسه فرد</label>
+    <input id="personId" type="number" formControlName="personId" />
+    <div class="error-message" *ngIf="step2Form.get('personId')?.errors?.['required'] && step2Form.get('personId')?.touched">
+      شناسه فرد الزامی است
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="locationPlaceId">محل سکونت</label>
+    <p-dropdown id="locationPlaceId" [options]="cityOptions" optionLabel="title" optionValue="id" formControlName="locationPlaceId" placeholder="انتخاب شهر"></p-dropdown>
+    <div class="error-message" *ngIf="step2Form.get('locationPlaceId')?.errors?.['required'] && step2Form.get('locationPlaceId')?.touched">
+      محل سکونت الزامی است
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="locationAddress">آدرس محل سکونت</label>
+    <input id="locationAddress" type="text" formControlName="locationAddress" />
+    <div class="error-message" *ngIf="step2Form.get('locationAddress')?.errors?.['required'] && step2Form.get('locationAddress')?.touched">
+      آدرس محل سکونت الزامی است
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="mobileNumber">شماره موبایل</label>
+    <input id="mobileNumber" type="text" formControlName="mobileNumber" />
+    <div class="error-message" *ngIf="step2Form.get('mobileNumber')?.errors?.['required'] && step2Form.get('mobileNumber')?.touched">
+      شماره موبایل الزامی است
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="telephoneNumber">شماره تلفن</label>
+    <input id="telephoneNumber" type="text" formControlName="telephoneNumber" />
+  </div>
+
+  <div class="form-group">
+    <label for="postCode">کد پستی</label>
+    <input id="postCode" type="text" formControlName="postCode" />
+  </div>
+
+  <div class="form-group">
+    <label for="fatherMobileNumber">شماره موبایل پدر</label>
+    <input id="fatherMobileNumber" type="text" formControlName="fatherMobileNumber" />
+  </div>
+
+  <div class="form-group">
+    <label for="motherMobileNumber">شماره موبایل مادر</label>
+    <input id="motherMobileNumber" type="text" formControlName="motherMobileNumber" />
+  </div>
+
+  <div class="form-group">
+    <label for="emailAddress">ایمیل</label>
+    <input id="emailAddress" type="email" formControlName="emailAddress" />
+    <div class="error-message" *ngIf="step2Form.get('emailAddress')?.errors?.['required'] && step2Form.get('emailAddress')?.touched">
+      ایمیل الزامی است
+    </div>
+    <div class="error-message" *ngIf="step2Form.get('emailAddress')?.errors?.['email'] && step2Form.get('emailAddress')?.touched">
+      ایمیل معتبر نیست
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="familiarMobileNumber">شماره موبایل آشنا</label>
+    <input id="familiarMobileNumber" type="text" formControlName="familiarMobileNumber" />
+  </div>
+  <div class="step-buttons">
+    <button type="button" (click)="goToPreviousStep()" pButton class="p-button-primary">قبلی</button>
+    <button type="button" (click)="goToNextStep()" pButton class="p-button-primary">بعدی</button>
+  </div>
+</form> 

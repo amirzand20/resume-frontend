@@ -1,0 +1,122 @@
+<form [formGroup]="step1Form">
+  <!-- National Number -->
+  <div class="form-group">
+    <label for="nationalNo">کد ملی</label>
+    <input id="nationalNo" type="text" formControlName="nationalNo" />
+    <div class="error-message" *ngIf="step1Form.get('nationalNo')?.errors?.['required'] && step1Form.get('nationalNo')?.touched">
+      کد ملی الزامی است
+    </div>
+  </div>
+
+  <!-- First Name -->
+  <div class="form-group">
+    <label for="firstName">نام</label>
+    <input id="firstName" type="text" formControlName="firstName" />
+    <div class="error-message" *ngIf="step1Form.get('firstName')?.errors?.['required'] && step1Form.get('firstName')?.touched">
+      نام الزامی است
+    </div>
+  </div>
+
+  <!-- Last Name -->
+  <div class="form-group">
+    <label for="lastName">نام خانوادگی</label>
+    <input id="lastName" type="text" formControlName="lastName" />
+    <div class="error-message" *ngIf="step1Form.get('lastName')?.errors?.['required'] && step1Form.get('lastName')?.touched">
+      نام خانوادگی الزامی است
+    </div>
+  </div>
+
+  <!-- Birth Date -->
+  <div class="form-group">
+    <label for="birthDate">تاریخ تولد</label>
+    <aja-persian-date-picker formControlName="birthDate"></aja-persian-date-picker>
+    <div class="error-message" *ngIf="step1Form.get('birthDate')?.errors?.['required'] && step1Form.get('birthDate')?.touched">
+      تاریخ تولد الزامی است
+    </div>
+  </div>
+
+  <!-- Birth Place ID -->
+  <div class="form-group">
+    <label for="birthPlaceId">محل تولد</label>
+    <p-dropdown id="birthPlaceId" [options]="cityOptions" optionLabel="title" optionValue="id" formControlName="birthPlaceId" placeholder="انتخاب شهر"></p-dropdown>
+    <div class="error-message" *ngIf="step1Form.get('birthPlaceId')?.errors?.['required'] && step1Form.get('birthPlaceId')?.touched">
+      محل تولد الزامی است
+    </div>
+  </div>
+
+  <!-- Location Place ID -->
+  <div class="form-group">
+    <label for="locationPlaceId">محل سکونت</label>
+    <p-dropdown id="locationPlaceId" [options]="cityOptions" optionLabel="title" optionValue="id" formControlName="locationPlaceId" placeholder="انتخاب شهر"></p-dropdown>
+    <div class="error-message" *ngIf="step1Form.get('locationPlaceId')?.errors?.['required'] && step1Form.get('locationPlaceId')?.touched">
+      محل سکونت الزامی است
+    </div>
+  </div>
+
+  <!-- Sex ID -->
+  <div class="form-group">
+    <label for="sexId">جنسیت</label>
+    <p-dropdown id="sexId" [options]="sexOptions" optionLabel="title" optionValue="id" formControlName="sexId" placeholder="انتخاب جنسیت"></p-dropdown>
+    <div class="error-message" *ngIf="step1Form.get('sexId')?.errors?.['required'] && step1Form.get('sexId')?.touched">
+      جنسیت الزامی است
+    </div>
+  </div>
+
+  <!-- About Me -->
+  <div class="form-group">
+    <label for="aboutMe">درباره من</label>
+    <input id="aboutMe" type="text" formControlName="aboutMe" />
+  </div>
+
+  <!-- Mobile Number -->
+  <div class="form-group">
+    <label for="mobileNumber">شماره موبایل</label>
+    <input id="mobileNumber" type="text" formControlName="mobileNumber" />
+    <div class="error-message" *ngIf="step1Form.get('mobileNumber')?.errors?.['required'] && step1Form.get('mobileNumber')?.touched">
+      شماره موبایل الزامی است
+    </div>
+  </div>
+
+  <!-- Telephone Number -->
+  <div class="form-group">
+    <label for="telephoneNumber">شماره تلفن</label>
+    <input id="telephoneNumber" type="text" formControlName="telephoneNumber" />
+  </div>
+
+  <!-- Email Address -->
+  <div class="form-group">
+    <label for="emailAddress">ایمیل</label>
+    <input id="emailAddress" type="email" formControlName="emailAddress" />
+    <div class="error-message" *ngIf="step1Form.get('emailAddress')?.errors?.['required'] && step1Form.get('emailAddress')?.touched">
+      ایمیل الزامی است
+    </div>
+    <div class="error-message" *ngIf="step1Form.get('emailAddress')?.errors?.['email'] && step1Form.get('emailAddress')?.touched">
+      ایمیل معتبر نیست
+    </div>
+  </div>
+
+  <!-- Address -->
+  <div class="form-group">
+    <label for="address">آدرس</label>
+    <input id="address" type="text" formControlName="address" />
+  </div>
+
+  <!-- Post Code -->
+  <div class="form-group">
+    <label for="postCode">کد پستی</label>
+    <input id="postCode" type="text" formControlName="postCode" />
+  </div>
+
+  <!-- Profile Image -->
+  <div class="form-group">
+    <label for="profileImage">تصویر پروفایل</label>
+    <p-fileUpload name="profileImage" mode="basic" customUpload="true" (uploadHandler)="onFileSelect($event)" chooseLabel="انتخاب فایل" />
+    <input type="hidden" formControlName="profileImage" />
+    <div *ngIf="step1Form.get('profileImage')?.value">
+      فایل انتخاب شده: {{ step1Form.get('profileImage')?.value }}
+    </div>
+  </div>
+  <div class="step-buttons">
+    <button type="button" (click)="goToNextStep()" pButton class="p-button-primary">بعدی</button>
+  </div>
+</form> 

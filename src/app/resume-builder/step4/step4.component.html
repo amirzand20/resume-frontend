@@ -1,0 +1,53 @@
+<form [formGroup]="step4Form">
+  <div class="form-group">
+    <label for="personId">شناسه فرد</label>
+    <input id="personId" type="number" formControlName="personId" />
+    <div class="error-message" *ngIf="step4Form.get('personId')?.errors?.['required'] && step4Form.get('personId')?.touched">
+      شناسه فرد الزامی است
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="jobTitle">عنوان شغلی</label>
+    <input id="jobTitle" type="text" formControlName="jobTitle" />
+    <div class="error-message" *ngIf="step4Form.get('jobTitle')?.errors?.['required'] && step4Form.get('jobTitle')?.touched">
+      عنوان شغلی الزامی است
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="jobTypeId">کد نوع شغل</label>
+    <p-dropdown id="jobTypeId" [options]="jobTypeOptions" optionLabel="title" optionValue="id" formControlName="jobTypeId" placeholder="انتخاب نوع شغل"></p-dropdown>
+    <div class="error-message" *ngIf="step4Form.get('jobTypeId')?.errors?.['required'] && step4Form.get('jobTypeId')?.touched">
+      کد نوع شغل الزامی است
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="jobOrganId">کد سازمان شغلی</label>
+    <p-dropdown id="jobOrganId" [options]="jobOrganOptions" optionLabel="title" optionValue="id" formControlName="jobOrganId" placeholder="انتخاب سازمان"></p-dropdown>
+    <div class="error-message" *ngIf="step4Form.get('jobOrganId')?.errors?.['required'] && step4Form.get('jobOrganId')?.touched">
+      کد سازمان شغلی الزامی است
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="startDate">تاریخ شروع</label>
+    <aja-persian-date-picker formControlName="startDate"></aja-persian-date-picker>
+    <div class="error-message" *ngIf="step4Form.get('startDate')?.errors?.['required'] && step4Form.get('startDate')?.touched">
+      تاریخ شروع الزامی است
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="endDate">تاریخ پایان</label>
+    <aja-persian-date-picker formControlName="endDate"></aja-persian-date-picker>
+    <div class="error-message" *ngIf="step4Form.get('endDate')?.errors?.['required'] && step4Form.get('endDate')?.touched">
+      تاریخ پایان الزامی است
+    </div>
+  </div>
+  <div class="step-buttons">
+    <button type="button" (click)="goToPreviousStep()" pButton class="p-button-primary">قبلی</button>
+    <button type="button" (click)="goToNextStep()" pButton class="p-button-primary">بعدی</button>
+  </div>
+</form> 
